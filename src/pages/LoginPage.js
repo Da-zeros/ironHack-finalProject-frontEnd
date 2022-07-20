@@ -20,15 +20,16 @@ function LoginPage(props) {
 
 		try {
 			const response = await loginService(requestBody);
-			
 			const token = response.data.authToken;
+			console.log(token)
 			logInUser(token);
 			navigate('/');
 		} catch (err) {
 			const errorDescription = err?.response?.data?.message;
+			console.log(err.response.data)
 			setErrorMessage(errorDescription);
 		}
-	};
+	}; 
 
 	return (
 		<div className="LoginPage">

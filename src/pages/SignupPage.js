@@ -7,7 +7,7 @@ function SignupPage(props) {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 	const [ name, setName ] = useState('');
-  const navigate = useNavigate();
+  	const navigate = useNavigate();
 	const [ errorMessage, setErrorMessage ] = useState(undefined);
 
 	const handleEmail = (e) => setEmail(e.target.value);
@@ -23,8 +23,8 @@ function SignupPage(props) {
       navigate("/login");
     }catch(err){
       if(err.response?.status === 400){
-        setErrorMessage(err.response.data.errorMessage);
-        console.log(errorMessage);
+		setErrorMessage(err.response.data.message);
+        console.log(err.response)
       }
     }
   };
