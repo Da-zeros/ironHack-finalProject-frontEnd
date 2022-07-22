@@ -9,15 +9,14 @@ function Navbar() {
 
   return (
     <nav>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
+      <Link to="/"><button>Home</button></Link>
 -
       {isLoggedIn
         ? (<>
-            <Link to="/projects">
-              <button>Projects</button>
-            </Link>
+            <Link to="/projects"><button>Projects</button></Link>
+            <Link to="/chat"><button>Chat</button></Link>
+            <Link to="/userDashboard"> <button>My Dashboard</button></Link>
+            
             <button onClick={logOutUser}>Logout</button>
             <span>{user.name}</span>
           </>)
@@ -25,6 +24,7 @@ function Navbar() {
         (<>
           <Link to="/signup"> <button>Signup</button> </Link>
           <Link to="/login"> <button>Login</button> </Link>
+         
         </>)
       }
     </nav>

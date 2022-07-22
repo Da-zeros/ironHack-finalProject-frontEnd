@@ -9,6 +9,8 @@ import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import PrivateRoute from './components/PrivateRoute'; 
 import AnonRoute from './components/AnonRoute'; 
+import Chat from './pages/Chat'
+import UserDashboard from './pages/UserDashboard';
 
 function App() {
 	return (
@@ -27,6 +29,33 @@ function App() {
 					}
 				/>
 
+				<Route
+					exact
+					path="/chat"
+					element={
+						<PrivateRoute>
+							<Chat />
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					exact
+					path="/chat/:chatId"
+					element={
+						<PrivateRoute>
+							<Chat />
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					exact
+					path="/userDashboard"
+					element={
+						<PrivateRoute>
+							<UserDashboard />
+						</PrivateRoute>
+					}
+				/>
 				<Route
 					exact
 					path="/projects/:id"
