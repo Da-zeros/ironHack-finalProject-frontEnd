@@ -1,5 +1,7 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+
+
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import ProjectListPage from './pages/ProjectListPage';
@@ -11,6 +13,10 @@ import PrivateRoute from './components/PrivateRoute';
 import AnonRoute from './components/AnonRoute'; 
 import Chat from './pages/Chat'
 import UserDashboard from './pages/UserDashboard';
+import Verify from './pages/VerifyPage';
+import VerifyPassPage from './pages/VerifiyPassPage'
+import ForgotPage from './pages/ForgotPage';
+import PasswordModifyPage from './pages/PasswordModifyPage';
 
 function App() {
 	return (
@@ -29,6 +35,9 @@ function App() {
 					}
 				/>
 
+				<Route path="/verify" element={<Verify/>} />
+				<Route path="/verifyTokenPass" element={< VerifyPassPage/>} />
+
 				<Route
 					exact
 					path="/chat"
@@ -38,6 +47,13 @@ function App() {
 						</PrivateRoute>
 					}
 				/>
+
+				<Route
+					exact
+					path="/forgot"
+					element={<ForgotPage />}
+				/>
+
 				<Route
 					exact
 					path="/chat/:chatId"
@@ -47,6 +63,7 @@ function App() {
 						</PrivateRoute>
 					}
 				/>
+				
 				<Route
 					exact
 					path="/userDashboard"
@@ -56,6 +73,7 @@ function App() {
 						</PrivateRoute>
 					}
 				/>
+
 				<Route
 					exact
 					path="/projects/:id"
@@ -83,6 +101,12 @@ function App() {
 							<LoginPage />
 						</AnonRoute>
 					}
+				/>
+
+				<Route
+					exact
+					path="/passwordModify"
+					element={<PasswordModifyPage />}
 				/>
 			</Routes>
 		</div>

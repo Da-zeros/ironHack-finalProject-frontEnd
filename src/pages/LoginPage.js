@@ -5,6 +5,7 @@ import { AuthContext } from './../context/auth.context';
 import { loginService } from '../services/auth.services';
 
 function LoginPage(props) {
+
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 	const [ errorMessage, setErrorMessage ] = useState(undefined);
@@ -15,6 +16,7 @@ function LoginPage(props) {
 	const handlePassword = (e) => setPassword(e.target.value);
 
 	const handleLoginSubmit = async (e) => {
+		
 		e.preventDefault();
 		const requestBody = { email, password };
 
@@ -48,6 +50,8 @@ function LoginPage(props) {
 
 			<p>Don't have an account yet?</p>
 			<Link to={'/signup'}> Sign Up</Link>
+
+			<Link to={'/forgot'}><p>forgoted password?</p></Link>
 		</div>
 	);
 }

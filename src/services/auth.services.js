@@ -14,4 +14,16 @@ const verifyService = () => {
 	return service.get(`${URL}/verify`);
 };
 
-export { signupService, loginService, verifyService };
+const forgotService = (mail) =>{
+	return service.post(`${URL}/forgot`, mail)
+}
+
+const verifyPassService = (token) =>{
+	return service.get(`${URL}/verifyPass/${token}`)
+}
+
+const passwordModifyService = (values) =>{
+	return service.post(`${URL}/passwordModify`, values)
+}
+
+export { signupService, loginService, verifyService, forgotService , verifyPassService, passwordModifyService};

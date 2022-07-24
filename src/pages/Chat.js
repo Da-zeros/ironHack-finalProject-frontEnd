@@ -3,13 +3,15 @@ import { useParams } from 'react-router-dom'
 import { getAllMessagesServices  } from '../services/chatServices'
 import io from "socket.io-client"
 
+import Swal from 'sweetalert2'
+
 let socket
 
 const Chat = () => {
     
     const [ allMessages, setAllMessages ] = useState([])
     const [ text, setText ] = useState("")
-
+    Swal.fire("aloha")
     const { chatId } = useParams()
   
     useEffect(()=>{

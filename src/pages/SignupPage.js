@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { signupService } from '../services/auth.services';
 
 
@@ -19,12 +20,14 @@ function SignupPage(props) {
 		// Create an object representing the request body
 		const requestBody = { email, password, name };
     try{
-      await signupService(requestBody);
+      const newUser = await signupService(requestBody);
+
+	  newUser && await Swal.fire(`Usuario ${newUser.data.name} registrado con éxito, correo de verificación enviado a ${newUser.data.email}`)
       navigate("/login");
     }catch(err){
       if(err.response?.status === 400){
 		setErrorMessage(err.response.data.message);
-        console.log(err.response)
+        
       }
     }
   };
