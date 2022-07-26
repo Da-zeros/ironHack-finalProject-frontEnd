@@ -37,8 +37,12 @@ const PasswordModifyPage = () => {
 
     const onSubmit = async values=>{
         
+      const userObj = {
+        values,
+        userEmail
+      }
         try {
-          const response = await passwordModifyService(values)
+          const response = await passwordModifyService(userObj)
           
           if(response){
             

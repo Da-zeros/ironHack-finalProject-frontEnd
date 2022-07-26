@@ -107,3 +107,5 @@ nav li {
 .TaskCard {
   background-color: #dfeef9;
 }
+
+#map { height: 180px; }

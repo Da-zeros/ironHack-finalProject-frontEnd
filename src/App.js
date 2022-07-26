@@ -17,6 +17,8 @@ import Verify from './pages/VerifyPage';
 import VerifyPassPage from './pages/VerifiyPassPage'
 import ForgotPage from './pages/ForgotPage';
 import PasswordModifyPage from './pages/PasswordModifyPage';
+import MapActivitiesPage from './pages/MapActivitiesPage';
+import AddActivity from './pages/NewActivity'
 
 function App() {
 	return (
@@ -24,7 +26,12 @@ function App() {
 			<Navbar />
 
 			<Routes>
-				<Route exact path="/" component={HomePage} />
+				<Route exact path="/" 
+					element={
+						<PrivateRoute>
+							<HomePage/>
+						</PrivateRoute>}
+						 />
 				<Route
 					exact
 					path="/projects"
@@ -34,6 +41,16 @@ function App() {
 						</PrivateRoute>
 					}
 				/>
+				<Route
+					exact
+					path="/addActivity"
+					element={
+						<PrivateRoute>
+							<AddActivity/>
+						</PrivateRoute>
+					}
+				/>
+
 
 				<Route path="/verify" element={<Verify/>} />
 				<Route path="/verifyTokenPass" element={< VerifyPassPage/>} />
@@ -108,6 +125,15 @@ function App() {
 					path="/passwordModify"
 					element={<PasswordModifyPage />}
 				/>
+
+				<Route
+					exact
+					path="/activitiesMap"
+					element={
+						<PrivateRoute>
+							<MapActivitiesPage />
+						</PrivateRoute>
+					}/>
 			</Routes>
 		</div>
 	);

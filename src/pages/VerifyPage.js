@@ -1,30 +1,32 @@
 import queryString from 'query-string'
 import { useEffect } from 'react'
 import axios from "axios"
-import {useLocation, useNavigate} from 'react-router-dom'
+import {useLocation, useNavigate, useSearchParams} from 'react-router-dom'
 import Swal from 'sweetalert2'
-
+import { verifyTokenService } from '../services/auth.services'
 
 const Verify = () => {
 
-  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const token = searchParams.get("token");
+
   const navigate = useNavigate();
-
-
 
   async function verifyAccToken(){
         
     try {
-      const {token} = queryString.parse(location.search)  
-      console.log(token)
       
-      await axios.post(`${process.env.REACT_APP_API_URL}/auth/verify/${token}`)
+      const response = await verifyTokenService(token)
       
-      await Swal.fire({
-        html: <i>{"Usuario verificado correctamente"}</i>,
-        icon: 'success'
-      })
+      if (response){
 
+        await Swal.fire({
+          html: <i>{"Usuario verificado correctamente"}</i>,
+          icon: 'success'
+        })
+
+      }
+      
     } catch (error) {
       console.log(error)
       await Swal.fire({
