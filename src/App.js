@@ -19,6 +19,7 @@ import ForgotPage from './pages/ForgotPage';
 import PasswordModifyPage from './pages/PasswordModifyPage';
 import MapActivitiesPage from './pages/MapActivitiesPage';
 import AddActivity from './pages/NewActivity'
+import FilteredActivities from './pages/FilteredActivities'
 
 function App() {
 	return (
@@ -132,6 +133,14 @@ function App() {
 					element={
 						<PrivateRoute>
 							<MapActivitiesPage />
+						</PrivateRoute>
+					}/>
+				<Route
+					exact
+					path="/Activities"
+					element={
+						<PrivateRoute>
+							<FilteredActivities />
 						</PrivateRoute>
 					}/>
 			</Routes>
