@@ -143,6 +143,7 @@ function App() {
 							<FilteredActivities />
 						</PrivateRoute>
 					}/>
+				
 			</Routes>
 		</div>
 	);

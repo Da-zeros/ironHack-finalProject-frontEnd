@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { getActivityTypeService, getFilteredActivity } from '../services/activities.services'
 import ActivitySearch from '../components/ActivitySearch'
+import { AuthContext } from "./../context/auth.context";  
+
 
 function HomePage() {
   
+  const { setFilter } = useContext(AuthContext)
+  const navigate = useNavigate()
+
   const [ findWord, setFindWord ] = useState("")
   const [ findType, setFindType ] = useState("")
   const [ findDate, setFindDate ] = useState("")
@@ -46,24 +51,27 @@ function HomePage() {
   }
 
   const handlenSubmit = async (e) => {
-   // e.preventDefault()
+   e.preventDefault()
     console.log("findDate ->" ,findDate.length ,"FindWord",findWord.length, "FinType ->", findType.length)
     try {
       let queryToSend = {}
-      console.log(queryToSend)
       
       if( findWord.length !== 0 ){
         queryToSend = { filterWord:findWord }
+        setFilter(queryToSend)
+        navigate(`/activities`)
       } 
       else if(findType.length !== 0){
         queryToSend = { filterType:findType }
+        setFilter(queryToSend)
+        navigate(`/activities`)
       }
       else if(findDate.length !== 0){
         queryToSend = { filterDate:findDate }
+        setFilter(queryToSend)
+        navigate(`/activities`)
       }
-
-      const findResponse = await getFilteredActivity( queryToSend )
-      console.log(findResponse)
+      
 
     } catch (err) {
       console.log(err)
