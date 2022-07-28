@@ -5,6 +5,11 @@ const URL = '/userDashboard';
 const getAllActivitiesServices = () => {
 	return service.get(`${URL}/`);
 };
+
+const addActivityServices = ( activityId ) => {
+	return service.put(`${URL}/${activityId}`)
+}
+
 const getProjectDetailsService = (id) => {
 	return service.get(`${URL}/${id}`);
 };
@@ -13,4 +18,4 @@ const addNewProjectService = (newProject) => {
 	return service.post(`${URL}/`, newProject);
 };
 
-export { getAllActivitiesServices };
+export { addActivityServices, getAllActivitiesServices };
