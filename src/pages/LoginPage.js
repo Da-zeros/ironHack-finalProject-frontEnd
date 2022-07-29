@@ -3,6 +3,7 @@ import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from './../context/auth.context';
 import { loginService } from '../services/auth.services';
+import "./styes/login.styles.css"
 
 function LoginPage(props) {
 
@@ -34,24 +35,26 @@ function LoginPage(props) {
 	}; 
 
 	return (
-		<div className="LoginPage">
-			<h1>Login</h1>
+		<div className="loginContainer">
+			<div className="LoginPage">
+				<h1>Login</h1>
 
-			<form onSubmit={handleLoginSubmit}>
-				<label>Email:</label>
-				<input type="text" name="email" value={email} onChange={handleEmail} />
+				<form onSubmit={handleLoginSubmit}>
+					<label>Email:</label>
+					<input type="text" name="email" value={email} onChange={handleEmail} />
 
-				<label>Password:</label>
-				<input type="password" name="password" value={password} onChange={handlePassword} />
+					<label>Password:</label>
+					<input type="password" name="password" value={password} onChange={handlePassword} />
 
-				<button type="submit">Login</button>
-			</form>
-			{errorMessage && <p className="error-message">{errorMessage}</p>}
+					<button type="submit">Login</button>
+				</form>
+				{errorMessage && <p className="error-message">{errorMessage}</p>}
 
-			<p>Don't have an account yet?</p>
-			<Link to={'/signup'}> Sign Up</Link>
+				<p>Don't have an account yet?</p>
+				<Link to={'/signup'}> Sign Up</Link>
 
-			<Link to={'/forgot'}><p>forgoted password?</p></Link>
+				<Link to={'/forgot'}><p>forgoted password?</p></Link>
+			</div>
 		</div>
 	);
 }

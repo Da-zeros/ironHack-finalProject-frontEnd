@@ -121,7 +121,7 @@ return (
     <div className="newActivityContainer">
         <div className="newActivityContainer-form">
         
-            <form onSubmit={e=>{handlenSubmit(e)}}>
+            <form className="newActivityContainer-form" onSubmit={e=>{handlenSubmit(e)}}>
                 <input 
                     name="title"
                     value={values.title}

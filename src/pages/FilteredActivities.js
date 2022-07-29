@@ -5,6 +5,9 @@ import { AuthContext } from "./../context/auth.context";
 import { getFilteredActivity } from '../services/activities.services';
 import { addActivityServices } from '../services/userDashboard.services';
 import Swal from 'sweetalert2';
+import ActivityPreview from '../components/ActivityPreview'
+
+
 const FilteredActivities = () => {
 
   const { filter } = useContext(AuthContext)
@@ -12,7 +15,8 @@ const FilteredActivities = () => {
   const [ filteredList, setFilteredList ] = useState([])
   const [ activityId, setActivityId ] = useState("")
   const [ message , setMessage ] = useState(undefined)
-
+  const [ activity,  setActivity ] = useState({})
+  const [ switchDetail, setSwitchDetail ] = useState(false)
 
   const sendQuery = async () =>{
     
@@ -25,8 +29,10 @@ const FilteredActivities = () => {
     sendQuery()
   },[])
 
-  const handleClick = (idValue) => {
-    setActivityId(idValue)
+  const handleClick = (value) => {
+    setSwitchDetail(!switchDetail)
+    setActivityId(value._id)
+    setActivity(value)
   }
 
   const addActivity = async () => {
@@ -59,19 +65,27 @@ const FilteredActivities = () => {
   }
 
   return (
-    <div className="filteredContaiener">
-      {
-        filteredList && filteredList.map( activity =>{
-          return (
-            <div key={activity._id}>
-              <h5>{activity.title}</h5>
-              <button onClick={ e => handleClick( activity._id )}>Select Activity</button>
-            </div>
+    <div className="filteredContainer">
+      <div>
+        {
+          filteredList && filteredList.map( activity =>{
+            return (
+              
+                <div className="filteredContaine-cardr" key={activity._id} onClick={ e => handleClick( activity )}>
+                  <h5>{activity.title}</h5>
+                  <p>{activity.location}</p>
+                  <button onClick={handleClick2}>Apuntate</button>
+                </div>
+                
             
-          )
-        })
-      }
-      <button onClick={handleClick2}>Apuntate</button>
+            )
+          })
+        }
+      </div>
+      <div className='filteredContaiener-detail'>
+        {switchDetail? <ActivityPreview activity={activity}/>:<h3>Touch the Card to see more info</h3>}
+      </div>
+      
       {message&&<span>{message}</span>}
     </div>
   )

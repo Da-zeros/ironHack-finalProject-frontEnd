@@ -1,8 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getActivityTypeService, getFilteredActivity } from '../services/activities.services'
+import { getActivityTypeService, getFilteredActivity, getActivitiesService, getCommentActivitiesService } from '../services/activities.services'
 import ActivitySearch from '../components/ActivitySearch'
-import { AuthContext } from "./../context/auth.context";  
+import { AuthContext } from "./../context/auth.context"; 
+import './styes/home.css' 
+import Swal from 'sweetalert2';
+
+import {AdvancedImage} from '@cloudinary/react';
+import {Cloudinary} from "@cloudinary/url-gen";
 
 
 function HomePage() {
@@ -10,9 +15,14 @@ function HomePage() {
   const { setFilter } = useContext(AuthContext)
   const navigate = useNavigate()
 
+  const [ lastAct, setLasAct ] = useState("")
+  const [ comentedAct, setComentedAct ] = useState([])
+
   const [ findWord, setFindWord ] = useState("")
   const [ findType, setFindType ] = useState("")
   const [ findDate, setFindDate ] = useState("")
+
+  const [ listActCo, setActCo ] = useState([])
   
 
   const [ types, setTypes] = useState([])
@@ -27,8 +37,36 @@ function HomePage() {
     }
   }
 
+  const getActivities = async () => {
+        
+    try {
+        const response = await getActivitiesService()
+        console.log(response)
+        const data = response.data
+        setLasAct(data)
+        //setTypes(response.data)
+    } catch (err) {
+        console.log(err)
+    }
+  }
+
+  const getComrntActivities = async () => {
+        
+    try {
+        const responseC = await getCommentActivitiesService()
+        console.log(responseC)
+        const data2 = responseC.data
+        setComentedAct(data2)
+        //setTypes(response.data)
+    } catch (err) {
+        console.log(err)
+    }
+  }
+
   useEffect(()=>{
+    getActivities()
     getActivitiTypes()
+    getComrntActivities()
   },[])
 
   const handleInputChange = (e) =>{
@@ -75,41 +113,110 @@ function HomePage() {
 
     } catch (err) {
       console.log(err)
-    }
-                                                                                                             
+    }                                                                                                 
   }
 
+ 
+  const cld = new Cloudinary({
+    cloud: {
+        cloudName: 'dcuvwmjab'
+    }
+    }); 
+
+   const handleLastAdded = (act) =>{
+    const myImage = cld.image(act.file)
+   
+       Swal.fire({
+      title: `${act.title}`,
+      text: `More activities like this one in ${act.type} section`,
+      
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+    })
+   }
+
+    
+
+
   return (
-    <div>
+    <div className="containerHome">
       <div className="searchContainer">
-        <h3>Find Activities</h3>
         <form>
-        <input
-          value={findWord}
-          onChange={handleInputChange}
-          placeholder="Search by location, activity, name"/>
-        <label>Type of activity</label>
-        <select 
-            name="activityType" 
-            value={findType}
-            onChange={handleSelectChange}
-            >
-            {
-                types&& types.map((type,i)=>{
-                    return <option key={i} value={type}>{type}</option>
-                })
-            }
-        </select>
-        <input 
-          type="date"
-          value={findDate}
-          onChange={handleDateCange}
-          />
-        <button type="submit" onClick={handlenSubmit}>find!</button>
+            <h2>Find Activities</h2>
+            <div className="form-group">
+              <label>Filter by name, location...</label>
+              <input
+              value={findWord}
+              onChange={handleInputChange}
+              placeholder="Search by location, activity, name"
+              />
+            </div>
+           
+            <div className="form-group">
+              <label>Filter by activity type</label>
+              <select 
+                  name="activityType" 
+                  value={findType}
+                  onChange={handleSelectChange}
+                  >
+                  {
+                      types&& types.map((type,i)=>{
+                          return <option key={i} value={type}>{type}</option>
+                      })
+                  }
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Filter by date</label>
+              <input 
+              type="date"
+              value={findDate}
+              onChange={handleDateCange}
+              />
+            </div>
         </form>
+        <button type="submit" onClick={handlenSubmit}>find!</button>
       </div>
-      <ActivitySearch />
-      <Link to="/addActivity"><button>Add new activity</button></Link>
+      <div className="ultimasAñadidasCont">
+          <h4>Last added</h4>
+          <hr></hr>
+            <div className="ultimasAñadidasCont-caja">
+            {
+              
+              lastAct && lastAct.map( act =>{
+                return (
+                  <div key={act._id} onClick={e=>handleLastAdded(act)} className="ultimasAñadidas-card">
+                    <h4>{act.title}</h4>
+                    <p>Location: {act.location}</p>
+                    <p>{act.description}</p>
+                    <p>Created: {act.createdAt}</p>
+                  </div>
+                )
+              })
+            }
+            </div>
+      </div>
+      <h4>Last comented</h4>
+          <hr></hr>
+      <div className="ultimasAñadidasCont-caja">
+      
+      {
+              
+              comentedAct && comentedAct.map( act =>{
+                return (
+                  <div key={act._id} onClick={e=>handleLastAdded(act)} className="ultimasAñadidas-card">
+                    <h4>{act.title}</h4>
+                    <p>Location: {act.location}</p>
+                    <p>{act.description}</p>
+                    <hr></hr>
+                    <p>Created: {act.comment}</p>
+                  </div>
+                )
+              })
+            }
+      </div>
     </div>
   );
 }

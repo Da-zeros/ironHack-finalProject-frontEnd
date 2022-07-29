@@ -10,6 +10,14 @@ const addActivityServices = ( activityId ) => {
 	return service.put(`${URL}/${activityId}`)
 }
 
+const getUserEnrolledActService = () => {
+	return service.get(`${URL}`)
+}
+
+const delEnroledActivityService = (delId) => {
+	return service.delete(`${URL}/${delId}`)
+}
+
 const getProjectDetailsService = (id) => {
 	return service.get(`${URL}/${id}`);
 };
@@ -18,4 +26,4 @@ const addNewProjectService = (newProject) => {
 	return service.post(`${URL}/`, newProject);
 };
 
-export { addActivityServices, getAllActivitiesServices };
+export { addActivityServices, getAllActivitiesServices, getUserEnrolledActService, delEnroledActivityService};

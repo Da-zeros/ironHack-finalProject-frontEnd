@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getAllMessagesServices  } from '../services/chatServices'
+import '../pages/styes/chat.css'
 import io from "socket.io-client"
 
 import Swal from 'sweetalert2'
@@ -11,7 +12,6 @@ const Chat = () => {
     
     const [ allMessages, setAllMessages ] = useState([])
     const [ text, setText ] = useState("")
-    Swal.fire("aloha")
     const { chatId } = useParams()
   
     useEffect(()=>{
@@ -48,9 +48,7 @@ const Chat = () => {
         })
       })
     }
-
-    
-    
+        
     const handleChange = (e) => setText(e.target.value)
     
     const sendMessage = () => {
@@ -61,15 +59,14 @@ const Chat = () => {
     }
 
   return (
-    <div className="LoginPage">
+    <div className="containerChat">
 			<h3>Chat Page</h3>
-
       <div>
       {
         allMessages && allMessages.map((eachMessage) =>{
           return (
-            <div key={eachMessage._id}>
-              <p>{eachMessage.sender.name}: {eachMessage.text}</p>
+            <div className="containerTexto" key={eachMessage._id}>
+              {eachMessage.sender.name}: {eachMessage.text}
             </div>
           )
         })

@@ -14,5 +14,17 @@ const getActivityTypeService = () => {
 	return service.get(`${URL}/type`);
 };
 
+const getActivitiesService = () => {
+	return service.get(`${URL}/all`);
+};
 
-export { newActivityService , getActivityTypeService, getFilteredActivity };
+const sendCommentService = (coment) =>{
+	return service.post(`${URL}/comment/`,coment)
+}
+
+const getCommentActivitiesService = () => {
+	return service.get(`${URL}/comment`)
+}
+
+
+export { newActivityService , getActivityTypeService, getFilteredActivity,  getActivitiesService ,sendCommentService, getCommentActivitiesService};

@@ -13,10 +13,8 @@ function Navbar() {
 -
       {isLoggedIn
         ? (<>
-            <Link to="/projects"><button>Projects</button></Link>
-            <Link to="/chat"><button>Chat</button></Link>
             <Link to="/userDashboard"> <button>My Dashboard</button></Link>
-            
+            <Link to="/addActivity"><button>Add new activity</button></Link>
             <button onClick={logOutUser}>Logout</button>
             <span>{user.name}</span>
           </>)
