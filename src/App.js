@@ -7,6 +7,9 @@ import HomePage from './pages/HomePage';
 import ProjectListPage from './pages/ProjectListPage';
 import ProjectDetailsPage from './pages/ProjectDetailsPage';
 
+import LandingBoard from './pages/landingBoard/LandingBoard'
+import AuthPage from './pages/userAuth/AuthPage'
+import PasswordModifyPage from './pages/passModify/PasswordModifyPage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import PrivateRoute from './components/PrivateRoute'; 
@@ -16,7 +19,7 @@ import UserDashboard from './pages/UserDashboard';
 import Verify from './pages/VerifyPage';
 import VerifyPassPage from './pages/VerifiyPassPage'
 import ForgotPage from './pages/ForgotPage';
-import PasswordModifyPage from './pages/PasswordModifyPage';
+
 import MapActivitiesPage from './pages/MapActivitiesPage';
 import AddActivity from './pages/NewActivity'
 import FilteredActivities from './pages/FilteredActivities'
@@ -24,15 +27,28 @@ import FilteredActivities from './pages/FilteredActivities'
 function App() {
 	return (
 		<div className="App">
-			<Navbar />
+
 
 			<Routes>
+			<Route
+				path="/" element={<LandingBoard />}
+				/>
+			<Route	
+				path="/auth" element={<AuthPage />}
+				/>
+			<Route	
+				path="/passModify" element={<PasswordModifyPage />}
+				/>
+				{/*
+
 				<Route exact path="/" 
 					element={
 						<PrivateRoute>
 							<HomePage/>
 						</PrivateRoute>}
-						 />
+					/>
+
+
 				<Route
 					exact
 					path="/projects"
@@ -52,7 +68,7 @@ function App() {
 					}
 				/>
 
-
+					
 				<Route path="/verify" element={<Verify/>} />
 				<Route path="/verifyTokenPass" element={< VerifyPassPage/>} />
 
@@ -143,7 +159,7 @@ function App() {
 							<FilteredActivities />
 						</PrivateRoute>
 					}/>
-				
+				*/}
 			</Routes>
 		</div>
 	);
