@@ -60,7 +60,7 @@ const PasswordModifyPage = () => {
         } catch (err) {
             console.log(err)
         }
-      }  
+    }  
 
     const { handleSubmit, handleChange, values, errors } = useFormik({
         initialValues, 

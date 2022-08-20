@@ -1,4 +1,4 @@
-import { useFormik, yupToFormErrors } from "formik";
+import { useFormik, yupToFormErrors } from "formik"
 import * as Yup from "yup";
 import Swal from "sweetalert2"
 import { newActivityService, getActivityTypeService} from "../services/activities.services"

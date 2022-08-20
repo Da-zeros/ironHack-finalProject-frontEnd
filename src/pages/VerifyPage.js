@@ -8,8 +8,9 @@ import { verifyTokenService } from '../services/auth.services'
 const Verify = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const token = searchParams.get("token");
 
+  const token = searchParams.get("token");
+  console.log(token)
   const navigate = useNavigate();
 
   async function verifyAccToken(){
@@ -20,15 +21,18 @@ const Verify = () => {
       
       if (response){
 
-        await Swal.fire({
-          html: <i>{"Usuario verificado correctamente"}</i>,
-          icon: 'success'
-        })
+        Swal.fire(
+          'Good job!',
+          'User succesfuly verified',
+          'success'
+        )
 
       }
       
+      
     } catch (error) {
       console.log(error)
+      
       await Swal.fire({
         html: <i>{error}</i>,
         icon: 'warning'
@@ -39,7 +43,7 @@ const Verify = () => {
 
   useEffect(()=>{
     verifyAccToken()
-    setTimeout(()=>navigate(`/login`),1000)
+    setTimeout(()=>navigate(`/auth`),1000)
   },[])
 
   return (

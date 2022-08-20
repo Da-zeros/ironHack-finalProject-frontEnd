@@ -3,20 +3,19 @@ import { Route, Routes } from 'react-router-dom';
 
 
 import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/homePage/HomePage';
 import ProjectListPage from './pages/ProjectListPage';
 import ProjectDetailsPage from './pages/ProjectDetailsPage';
 
 import LandingBoard from './pages/landingBoard/LandingBoard'
 import AuthPage from './pages/userAuth/AuthPage'
 import PasswordModifyPage from './pages/passModify/PasswordModifyPage';
-import SignupPage from './pages/SignupPage';
-import LoginPage from './pages/LoginPage';
+
 import PrivateRoute from './components/PrivateRoute'; 
 import AnonRoute from './components/AnonRoute'; 
 import Chat from './pages/Chat'
 import UserDashboard from './pages/UserDashboard';
-import Verify from './pages/VerifyPage';
+import VerifyPage from './pages/VerifyPage';
 import VerifyPassPage from './pages/VerifiyPassPage'
 import ForgotPage from './pages/ForgotPage';
 
@@ -31,23 +30,40 @@ function App() {
 
 			<Routes>
 			<Route
-				path="/" element={<LandingBoard />}
+				path="/" 
+				element={
+					<AnonRoute>
+						<LandingBoard />
+					</AnonRoute>}
 				/>
 			<Route	
-				path="/auth" element={<AuthPage />}
+				path="/auth" 
+				element={
+					<AnonRoute>
+						<AuthPage />
+					</AnonRoute>}
 				/>
 			<Route	
-				path="/passModify" element={<PasswordModifyPage />}
+				path="/passModify" 
+				element={
+					<AnonRoute>
+						<PasswordModifyPage />
+					</AnonRoute>}
 				/>
+			<Route exact path="/homePage" 
+				element={
+					<PrivateRoute>
+						<HomePage />
+					</PrivateRoute>}
+			/>
+			<Route exact path="verify"
+				element={
+					<AnonRoute>
+						<VerifyPage />
+					</AnonRoute>
+				}
+			/>
 				{/*
-
-				<Route exact path="/" 
-					element={
-						<PrivateRoute>
-							<HomePage/>
-						</PrivateRoute>}
-					/>
-
 
 				<Route
 					exact
@@ -69,7 +85,7 @@ function App() {
 				/>
 
 					
-				<Route path="/verify" element={<Verify/>} />
+				
 				<Route path="/verifyTokenPass" element={< VerifyPassPage/>} />
 
 				<Route

@@ -13,13 +13,11 @@ const LandingBoard = () => {
     <div className='mainContainer'>
       <video className="mainContainer--video" src={videoSource} autoPlay loop muted />
       <div className="mainContainer--overlay"></div>
+      
       <div className="mainContainer--nabBarLanding">
-        
           <a className="mainContainer--nabBar_item1" onClick={ handleClick }>How we work</a>
           <a className="mainContainer--nabBar_item2" >Take a tour</a>
           <Link to={'/auth'} className="mainContainer--nabBar_item3" >LogIn</Link>
-          
-        
       </div>
     
       <div className="mainContainer--wraper">
@@ -48,8 +46,6 @@ const LandingBoard = () => {
         }
       </div>
     </div>
-    
-      
     
   )
 }

@@ -111,7 +111,13 @@ button:hover{
     cursor: pointer;
     
 }
+.mainContainer--glassBox--loginForm_error{
+    font-size: 0.8em;
+    font-style: italic;
+    color: rgba(253, 29, 29, 0.742);
+    max-width: 300px;
 
+}
 input
 {
     background: transparent;
