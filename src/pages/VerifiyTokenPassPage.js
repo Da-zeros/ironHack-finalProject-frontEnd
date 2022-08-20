@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import { verifyPassService } from '../services/auth.services'
 
 
-const VerifyPassPage = () => {
+const VerifiyTokenPassPage = () => {
 
     const [userEmail, setUserEmail] = useState()
     const [searchParams, setSearchParams] = useSearchParams();
@@ -17,21 +17,18 @@ const VerifyPassPage = () => {
     async function verifyAccToken(){
         
         try {
-    
-        const response = await verifyPassService(token)
+          const response = await verifyPassService(token)
   
         if(response.data){
           setUserEmail(response.data.email)
-          
-
         }
           
         } catch (error) {
-        console.log(error)
-        await Swal.fire({
-            html: <i>{error}</i>,
-            icon: 'warning'
-        })
+          console.log(error)
+          await Swal.fire({
+              html: <i>{error}</i>,
+              icon: 'warning'
+          })
         }    
 
   }
@@ -57,4 +54,4 @@ const VerifyPassPage = () => {
   )
 }
 
-export default VerifyPassPage
+export default VerifiyTokenPassPage

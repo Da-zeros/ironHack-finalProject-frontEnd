@@ -15,7 +15,7 @@ function AuthPage() {
 	return (
 
 		<div className='mainContainer'>
-      	<video className="mainContainer--video" src={videoSource} autoPlay loop muted />
+      	<video className="mainContainer--video_noFadeIn" src={videoSource} autoPlay loop muted />
       	<div className="mainContainer--overlay"></div>
       	<div className="mainContainer--nabBar">
 		  <Link to={'/'} className="mainContainer--nabBar_link">Home</Link>
@@ -55,7 +55,7 @@ function AuthPage() {
 				{errorMessage&& <span className='mainContainer--glassBox--loginForm_error'>{ errorMessage }</span>}
 
 				<p className="mainContainer--glassBox--loginForm_signLink">Don't have an account yet? <span onClick={ handleClick }>Sign Up</span></p>
-				<Link className="mainContainer--glassBox--loginForm_link" to={'/passModify'}><p>forgoted password?</p></Link>
+				<Link className="mainContainer--glassBox--loginForm_link" to={'/forgotPass'}><p>forgoted password?</p></Link>
 			</div>
 			:
 			<SignUpComponent switchState={ handleClick } />	

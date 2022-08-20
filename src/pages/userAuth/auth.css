@@ -3,7 +3,7 @@
     width: 100%;
     height: 100vh;
 }
-.mainContainer--video{
+.mainContainer--video_noFadeIn{
     z-index: 0;
     width: 100%;
     height: 100%;
@@ -151,13 +151,10 @@ input:focus::placeholder {
     padding: 10px 50px;
     background-color:transparent;
     border-radius: 50px;
-    opacity: 0;
-    animation: fade 0.5s ease-in-out forwards;
+    
 }
 
-@keyframes fade{
-    to{opacity: 1; }
-    }
+
 
 .mainContainer--glassBox--loginForm_btn:hover{
     cursor: pointer;

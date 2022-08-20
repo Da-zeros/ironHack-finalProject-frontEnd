@@ -1,81 +1,44 @@
 import React, { useState } from 'react'
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import Swal from "sweetalert2"
-import {forgotService } from '../services/auth.services'
-
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useForgotPassVal } from '../customHooks/useForgotPassVal';
+import videoSource from '../media/videoBackground.mp4'
+import './passModify/styles.css'
 
 
 const ForgotPage = () => {
     
-  const navigate = useNavigate();
-
-    const [ errorMessage, setErrorMessage ] = useState(undefined);
-    const [email, setEmail] = useState("")
-
-    const validationSchema = Yup.object({
-        email: Yup.string().required("Email field is required").email("wrong email format")
-    })
-
-    const initialValues = {
-        email:""
-    }
-
-    const onSubmit = async values=>{
-        
-        try {
-          
-          const response = await forgotService(values) 
-          
-          if(!response){
-            
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: "Look like there's no user with this email!",
-            })
-
-          }
-          else{
-
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: `Confirm passwordModify token sent to ${values.email}`,
-              showConfirmButton: false,
-              timer: 1500
-            })
-
-            navigate('/login')
-          }
-        } catch (error) {
-            
-        }
-      }  
-
-    const { handleSubmit, handleChange, values, errors } = useFormik({
-        initialValues, 
-        validationSchema,
-        onSubmit,
-      });
+  const { values, errors, handleChange, handleSubmit, errorMessage } = useForgotPassVal()
 
   return (
-    <div className="SignupPage">
-			<h1>Forgot password</h1>
 
-			<form onSubmit={handleSubmit}>
-				<label>Email:</label>
-        <input 
-            name="email"
-            onChange={handleChange}
-            value={values.email}
-            placeholder="email"/>
-            {errors.email ? errors.email : null}
-				<button type="submit">Send</button>
-			</form>
+    <div className='mainContainer'>
+      <video className="mainContainer--video_noFadeIn" src={ videoSource } autoPlay loop muted />
+      <div className="mainContainer--overlay"></div>
+      <div className="mainContainer--nabBar">
+		      <Link to={'/'} className="mainContainer--nabBar_link">Home</Link>
+          <a className="mainContainer--nabBar_link">Take a tour</a>
+          <a className="mainContainer--nabBar_link">LogIn</a>
+     	  </div>
+    
+		    <div className="mainContainer--wraper">
+			
+          <div className="mainContainer--glassBox">
+          <form className="mainContainer--glassBox--loginForm" onSubmit={handleSubmit}>
+            <h2>Forgot password</h2>
+            <input 
+                name="email"
+                onChange={handleChange}
+                value={values.email}
+                placeholder="Email"/>
+                <span className='mainContainer--glassBox--loginForm_error'>{errors.email ? errors.email : null}</span>
+                {errorMessage&& <span className='mainContainer--glassBox--loginForm_error'>{ errorMessage }</span>}
+            <button className="mainContainer--glassBox--loginForm_btn" type="submit">Send</button>
+          </form>
+          
+          </div>
+        </div>
 
-			{errorMessage && <p className="error-message">{errorMessage}</p>}
+			
     </div>
   )
 }

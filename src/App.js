@@ -16,7 +16,7 @@ import AnonRoute from './components/AnonRoute';
 import Chat from './pages/Chat'
 import UserDashboard from './pages/UserDashboard';
 import VerifyPage from './pages/VerifyPage';
-import VerifyPassPage from './pages/VerifiyPassPage'
+import VerifiyTokenPassPage from './pages/VerifiyTokenPassPage'
 import ForgotPage from './pages/ForgotPage';
 
 import MapActivitiesPage from './pages/MapActivitiesPage';
@@ -43,19 +43,7 @@ function App() {
 						<AuthPage />
 					</AnonRoute>}
 				/>
-			<Route	
-				path="/passModify" 
-				element={
-					<AnonRoute>
-						<PasswordModifyPage />
-					</AnonRoute>}
-				/>
-			<Route exact path="/homePage" 
-				element={
-					<PrivateRoute>
-						<HomePage />
-					</PrivateRoute>}
-			/>
+					
 			<Route exact path="verify"
 				element={
 					<AnonRoute>
@@ -63,17 +51,39 @@ function App() {
 					</AnonRoute>
 				}
 			/>
+
+			<Route	
+				path="/forgotPass" 
+				element={
+					<AnonRoute>
+						<ForgotPage />
+					</AnonRoute>}
+				/>
+
+			<Route exact path="/verifyTokenPass" 
+				element={
+					<AnonRoute>
+						<VerifiyTokenPassPage />
+					</AnonRoute>
+				}/>
+			
+			<Route exact path="/passwordModify"
+				element={
+					<AnonRoute>
+						<PasswordModifyPage />
+					</AnonRoute>
+				}
+			/>
+
+			<Route exact path="/homePage" 
+				element={
+					<PrivateRoute>
+						<HomePage />
+					</PrivateRoute>}
+			/>
 				{/*
 
-				<Route
-					exact
-					path="/projects"
-					element={
-						<PrivateRoute>
-							<ProjectListPage />
-						</PrivateRoute>
-					}
-				/>
+				
 				<Route
 					exact
 					path="/addActivity"
@@ -86,7 +96,7 @@ function App() {
 
 					
 				
-				<Route path="/verifyTokenPass" element={< VerifyPassPage/>} />
+				
 
 				<Route
 					exact
@@ -98,11 +108,7 @@ function App() {
 					}
 				/>
 
-				<Route
-					exact
-					path="/forgot"
-					element={<ForgotPage />}
-				/>
+	
 
 				<Route
 					exact
@@ -134,24 +140,8 @@ function App() {
 					}
 				/>
 
-				<Route
-					exact
-					path="/signup"
-					element={
-						<AnonRoute>
-							<SignupPage />
-						</AnonRoute>
-					}
-				/>
-				<Route
-					exact
-					path="/login"
-					element={
-						<AnonRoute>
-							<LoginPage />
-						</AnonRoute>
-					}
-				/>
+			
+				
 
 				<Route
 					exact
