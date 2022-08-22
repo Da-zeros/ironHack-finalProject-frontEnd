@@ -1,53 +1,111 @@
 body{
     overflow: visible;
+    background-color: #e9ecef;
 }
 
-.homeContainer{
-    display: grid;
-    grid-template-rows: repeat(3,1fr);
-}
-
-.homeContainer-section{
-    border: 1px solid black;
-}
-
-/*
-.containerHome{
-    
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+.homeContainer,
+.homeContainer-sectionsGroup{
+   display: grid;
    
 }
 
-.searchContainer{
-    padding: 20px;
+.homeContainer{
+    grid-template-columns: 0.2fr 3fr;
+}
+.homeContainer h2{
+    font-size: 2em;
+}
+
+.homeContainer-sectionsGroup{
+    grid-template-rows: repeat(3,auto);
+}
+
+
+
+.homeContainer-section{
+   padding: 20px 20px 50px 20px;
+}
+
+.cityBackground{
+    background-image: url("../../media/cityBackground.jpeg");
+    background-position: center;
+    background-size: cover;
+}
+
+.homeContainer-section h2{
+    margin: 25px 0;
+    font-style: italic;
+    font-weight: 300;
+ }
+
+.whiteColor{
+    color: #fff;
+}
+
+.grey{
+    font-weight: bold;
+    color: grey;
+}
+
+
+
+.homeContainer-searchArticle,
+.homeContainer-lastAddedArticle,
+.homeContainer-lastComented{
     display: flex;
+}
+
+.homeContainer-searchArticle{
+    margin: 20px auto;
+    width: 650px;
+    padding: 20px;
     flex-direction: column;
     align-items:center;
     justify-content: center;
-    box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 3px 2.5px 2.5px rgba(0,0,0,0.55);
+    background-color: rgba(255, 255, 255, 0.883);
 }
 
-.form-group{
+.homeContainer-formGroup{
     display: flex;
     justify-content: center;
     align-items: baseline;
 }
 
-.form-group input{
-   width: 300px;
+.homeContainer-searchArticle button{
+    width: 300px;
+    margin: 20px 0;
+  }
+
+
+.homeContainer-formGroup input{
+    width: 300px;
+ }
+
+
+
+.homeContainer-card{
+    overflow: hidden;
+    width: 500px;
+    margin: 10px;
+    max-width: 400px;
+    padding: 20px;
+    box-shadow: 5px 10px 15px 5px rgba(0,0,0,0.20);
 }
 
-.searchContainer button{
-  width: 300px;
+.homeContainer-card:hover{
+    cursor: pointer;
+    transform: scale(0.9)
 }
 
-.ultimasAñadidasCont{
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
+.homeContainer-lastAddedArticle{
+    flex-wrap: wrap;
+   
 }
+/*
+
+
+
 
 .ultimasAñadidasCont h4{
  margin: 20px;
@@ -55,14 +113,4 @@ body{
 
 .ultimasAñadidasCont-caja{display: flex;}
 
-.ultimasAñadidas-card{
-    margin: 10px;
-    max-width: 400px;
-    padding: 20px;
-    box-shadow: 5px 10px 15px 5px rgba(0,0,0,0.20);
-}
-
-.ultimasAñadidas-card:hover{
-    cursor: pointer;
-    transform: scale(0.9)
-}*/
+*/

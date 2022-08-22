@@ -67,7 +67,7 @@ function Navbar() {
           <div className="nav-details">
           <img src="icons/user.png"/>
           <div className="nav-footer-info">
-            <p className="nav-footer-user-name">{user}</p>
+            <p className="nav-footer-user-name">Dani</p>
           </div>
          
         </div>

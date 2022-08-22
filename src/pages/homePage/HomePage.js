@@ -5,6 +5,7 @@ import ActivitySearch from '../../components/ActivitySearch'
 import { AuthContext } from "../../context/auth.context"; 
 import './styles.css' 
 import Swal from 'sweetalert2';
+import NavBar from '../../components/navBar/Navbar'
 
 import {Cloudinary} from "@cloudinary/url-gen";
 
@@ -144,104 +145,100 @@ function HomePage() {
 
   return (
     <div className="homeContainer">
-      <section className="homeContainer-section">
-        <article>
-        <form className="homeContainer-section-form">
-            <h2>Find Activities</h2>
+      <div>
+       <NavBar />
+      </div>
+      <div className="homeContainer-sectionsGroup">
+       
+        <section className="homeContainer-section cityBackground">
+          <h2 className="whiteColor big">Find Activities</h2>
+          
+          <article className="homeContainer-searchArticle">
+            <form className="homeContainer-form">
+              
+              <div className="homeContainer-formGroup">
+                <label>Filter by name, location...</label>
+                <input
+                value={findWord}
+                onChange={handleInputChange}
+                placeholder="Search by location, activity, name"
+                />
+              </div>
             
-              <input
-              value={findWord}
-              onChange={handleInputChange}
-              placeholder="Search by location, activity, name"
-              />
-            
-            
-            <div className="form-group">
-              <label>Filter by activity type</label>
-              <select 
-                  name="activityType" 
-                  value={findType}
-                  onChange={handleSelectChange}
-                  >
-                  {
-                      types&& types.map((type,i)=>{
-                          return <option key={i} value={type}>{type}</option>
-                      })
-                  }
-              </select>
-            </div>
+              <div className="homeContainer-formGroup">
+                <label>Filter by activity type</label>
+                <select 
+                    name="activityType" 
+                    value={findType}
+                    onChange={handleSelectChange}
+                    >
+                    {
+                        types&& types.map((type,i)=>{
+                            return <option key={i} value={type}>{type}</option>
+                        })
+                    }
+                </select>
+              </div>
 
-            <div className="form-group">
-              <label>Filter by date</label>
-              <input 
-              type="date"
-              value={findDate}
-              onChange={handleDateCange}
-              />
-            </div>
-        </form>
-        <button type="submit" onClick={handlenSubmit}>find!</button>
-        </article>
-      </section>
-      <section className="homeContainer-section">
-        <article>
-        <h2>seccion2</h2>
-        </article>
-      </section>
-      <section className="homeContainer-section">
-        <article>
-        <h2>seccion3</h2>
-        </article>
-      </section>
+              <div className="homeContainer-formGroup">
+                <label>Filter by date</label>
+                
+                <input 
+                type="date"
+                value={findDate}
+                onChange={handleDateCange}
+                />
+              </div>
+              <button type="submit" onClick={handlenSubmit}>find!</button>
+            </form>
+          </article>
+         
+        </section>
+
+        <section className="homeContainer-section">
+          <h2>Look <span className="grey">the Last added</span> activities!</h2>
+          <hr></hr>
+          <article className="homeContainer-lastAddedArticle">
+                {
+                
+                lastAct && lastAct.map( act =>{
+                  return (
+                    <div key={act._id} onClick={e=>handleLastAdded(act)} className="homeContainer-card">
+                      <h4>{act.title}</h4>
+                      <p>Location: {act.location}</p>
+                      <p>{act.description}</p>
+                      <p>Created: {act.createdAt}</p>
+                    </div>
+                  )
+                })
+                }
+          </article>
+          
+        </section>
+
+        <section className="homeContainer-section">
+          <h2 >What do the <span className='grey'>people think about</span> activities?</h2>
+          <hr></hr>
+          <article className="homeContainer-lastComented">
+          {
+            comentedAct && comentedAct.map( act =>{
+              return (
+                <div key={act._id} onClick={e=>handleLastAdded(act)} className="homeContainer-card">
+                  <h4>{act.title}</h4>
+                  <p>Location: {act.location}</p>
+                  <p>{act.description}</p>
+                  <hr></hr>
+                  <p>Created: {act.comment}</p>
+                </div>
+              )
+            })
+          }
+          </article>
+        </section>
+
+      </div>
     </div>
   );
 }
 
 export default HomePage;
-
-/**
- * 
- * <div className="containerHome">
-      <div className="searchContainer">
-       
-      </div>
-      <div className="ultimasAñadidasCont">
-        <h4>Last added</h4>
-        <hr></hr>
-        <div className="ultimasAñadidasCont-caja">
-        {
-          
-          lastAct && lastAct.map( act =>{
-            return (
-              <div key={act._id} onClick={e=>handleLastAdded(act)} className="ultimasAñadidas-card">
-                <h4>{act.title}</h4>
-                <p>Location: {act.location}</p>
-                <p>{act.description}</p>
-                <p>Created: {act.createdAt}</p>
-              </div>
-            )
-          })
-        }
-        </div>
-      </div>
-      <div className="ultimasAñadidasCont-caja">
-        <h4>Last comented</h4>
-        <hr></hr>
-        {
-              
-              comentedAct && comentedAct.map( act =>{
-                return (
-                  <div key={act._id} onClick={e=>handleLastAdded(act)} className="ultimasAñadidas-card">
-                    <h4>{act.title}</h4>
-                    <p>Location: {act.location}</p>
-                    <p>{act.description}</p>
-                    <hr></hr>
-                    <p>Created: {act.comment}</p>
-                  </div>
-                )
-              })
-            }
-      </div>
-    </div>
- * 
- */

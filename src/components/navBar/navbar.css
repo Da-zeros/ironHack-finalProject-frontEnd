@@ -4,7 +4,7 @@
     height: 100vh;
     position: relative;
     color:  var(--light);
-
+    position: fixed;
     transition: 0.5s;
 }
 

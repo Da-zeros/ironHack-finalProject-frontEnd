@@ -78,7 +78,7 @@ function App() {
 			<Route exact path="/homePage" 
 				element={
 					<PrivateRoute>
-						<Navbar />
+				
 						<HomePage />
 					</PrivateRoute>}
 			/>
