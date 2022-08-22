@@ -5,7 +5,7 @@ import { sendCommentService } from '../services/activities.services'
 import { startChatServices } from '../services/chatServices' 
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClipboardUser } from '@fortawesome/free-solid-svg-icons'
+
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faCommentDots } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'

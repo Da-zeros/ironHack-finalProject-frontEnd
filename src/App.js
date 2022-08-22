@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 
 
-import Navbar from './components/Navbar';
+import Navbar from './components/navBar/Navbar';
 import HomePage from './pages/homePage/HomePage';
 import ProjectListPage from './pages/ProjectListPage';
 import ProjectDetailsPage from './pages/ProjectDetailsPage';
@@ -78,9 +78,11 @@ function App() {
 			<Route exact path="/homePage" 
 				element={
 					<PrivateRoute>
+						<Navbar />
 						<HomePage />
 					</PrivateRoute>}
 			/>
+			<Route path="/nav" element={ <Navbar />}/>
 				{/*
 
 				

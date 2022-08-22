@@ -3,10 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getActivityTypeService, getFilteredActivity, getActivitiesService, getCommentActivitiesService } from '../../services/activities.services'
 import ActivitySearch from '../../components/ActivitySearch'
 import { AuthContext } from "../../context/auth.context"; 
-import '../styes/home.css' 
+import './styles.css' 
 import Swal from 'sweetalert2';
 
-import {AdvancedImage} from '@cloudinary/react';
 import {Cloudinary} from "@cloudinary/url-gen";
 
 
@@ -144,41 +143,18 @@ function HomePage() {
 
 
   return (
-    
-    <div>
-      <nav>
-      <Link to="/"><button>Home</button></Link>
-
-      {isLoggedIn
-        ? (<>
-            <Link to="/userDashboard"> <button>My Dashboard</button></Link>
-            <Link to="/addActivity"><button>Add new activity</button></Link>
-            <button onClick={logOutUser}>Logout</button>
-            <span>{user.name}</span>
-          </>)
-        : 
-        (<>
-          <Link to="/signup"> <button>Signup</button> </Link>
-          <Link to="/login"> <button>Login</button> </Link>
-          
-        
-        </>)
-      }
-    </nav>
-  
-  
-    <div className="containerHome">
-      <div className="searchContainer">
-        <form>
+    <div className="homeContainer">
+      <section className="homeContainer-section">
+        <article>
+        <form className="homeContainer-section-form">
             <h2>Find Activities</h2>
-            <div className="form-group">
-              <label>Filter by name, location...</label>
+            
               <input
               value={findWord}
               onChange={handleInputChange}
               placeholder="Search by location, activity, name"
               />
-            </div>
+            
             
             <div className="form-group">
               <label>Filter by activity type</label>
@@ -205,31 +181,53 @@ function HomePage() {
             </div>
         </form>
         <button type="submit" onClick={handlenSubmit}>find!</button>
+        </article>
+      </section>
+      <section className="homeContainer-section">
+        <article>
+        <h2>seccion2</h2>
+        </article>
+      </section>
+      <section className="homeContainer-section">
+        <article>
+        <h2>seccion3</h2>
+        </article>
+      </section>
+    </div>
+  );
+}
+
+export default HomePage;
+
+/**
+ * 
+ * <div className="containerHome">
+      <div className="searchContainer">
+       
       </div>
       <div className="ultimasAñadidasCont">
-          <h4>Last added</h4>
-          <hr></hr>
-            <div className="ultimasAñadidasCont-caja">
-            {
-              
-              lastAct && lastAct.map( act =>{
-                return (
-                  <div key={act._id} onClick={e=>handleLastAdded(act)} className="ultimasAñadidas-card">
-                    <h4>{act.title}</h4>
-                    <p>Location: {act.location}</p>
-                    <p>{act.description}</p>
-                    <p>Created: {act.createdAt}</p>
-                  </div>
-                )
-              })
-            }
-            </div>
+        <h4>Last added</h4>
+        <hr></hr>
+        <div className="ultimasAñadidasCont-caja">
+        {
+          
+          lastAct && lastAct.map( act =>{
+            return (
+              <div key={act._id} onClick={e=>handleLastAdded(act)} className="ultimasAñadidas-card">
+                <h4>{act.title}</h4>
+                <p>Location: {act.location}</p>
+                <p>{act.description}</p>
+                <p>Created: {act.createdAt}</p>
+              </div>
+            )
+          })
+        }
+        </div>
       </div>
-      <h4>Last comented</h4>
-          <hr></hr>
       <div className="ultimasAñadidasCont-caja">
-      
-      {
+        <h4>Last comented</h4>
+        <hr></hr>
+        {
               
               comentedAct && comentedAct.map( act =>{
                 return (
@@ -245,8 +243,5 @@ function HomePage() {
             }
       </div>
     </div>
-    </div>
-  );
-}
-
-export default HomePage;
+ * 
+ */

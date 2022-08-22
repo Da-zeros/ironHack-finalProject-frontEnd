@@ -1,4 +1,11 @@
 
+:root{
+  --primary:#55717e;
+  --dark:#061b28;
+  --gray:#756388;
+  --light:#ffff;
+}
+
 body {
   width: 100%;
   height: 100vh;
@@ -8,7 +15,6 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
 }
-
 
 
 button,
