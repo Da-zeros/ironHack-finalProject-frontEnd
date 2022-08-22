@@ -10,7 +10,7 @@ body{
 }
 
 .homeContainer{
-    grid-template-columns: 0.2fr 3fr;
+    grid-template-columns: repeat(2, auto);
 }
 .homeContainer h2{
     font-size: 2em;
@@ -55,6 +55,13 @@ body{
     display: flex;
 }
 
+.homeContainer-lastAddedArticle,
+.homeContainer-lastComented{
+    flex-wrap: wrap;
+    margin-left: 50px;
+   
+}
+
 .homeContainer-searchArticle{
     margin: 20px auto;
     width: 650px;
@@ -66,17 +73,55 @@ body{
     background-color: rgba(255, 255, 255, 0.883);
 }
 
+.homeContainer-form{
+    display: grid;
+    grid-template-columns:1fr 0.5fr;
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas: 
+    "label input"
+    "buton buton"
+    ;
+}
+
+.homeContainer-label{
+    grid-area: label;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.homeContainer-input{
+    color: black;
+    grid-area: input;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;  
+}
+
+.homeContainer-input input:focus{
+    color: black;
+}
+
+.homeContainer-btn{
+    grid-area: buton;
+    margin: 0 auto;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.homeContainer-btn button{
+    width: 50%;
+    border-radius: 50px;
+}
+
 .homeContainer-formGroup{
     display: flex;
     justify-content: center;
     align-items: baseline;
 }
-
-.homeContainer-searchArticle button{
-    width: 300px;
-    margin: 20px 0;
-  }
-
 
 .homeContainer-formGroup input{
     width: 300px;
@@ -85,6 +130,8 @@ body{
 
 
 .homeContainer-card{
+    
+    background-color: rgba(255, 255, 255, 0.969);
     overflow: hidden;
     width: 500px;
     margin: 10px;
@@ -93,24 +140,22 @@ body{
     box-shadow: 5px 10px 15px 5px rgba(0,0,0,0.20);
 }
 
+.noShadow{
+    box-shadow: 2px 5px 5px 2px rgba(0,0,0,0.15);
+}
+
 .homeContainer-card:hover{
     cursor: pointer;
     transform: scale(0.9)
 }
 
-.homeContainer-lastAddedArticle{
-    flex-wrap: wrap;
-   
-}
-/*
-
-
-
-
-.ultimasAñadidasCont h4{
- margin: 20px;
+.blackBacground{
+    background-image: url('../../media/blackBackground.jpeg');
+    background-position: center;
+    background-size: cover;
 }
 
-.ultimasAñadidasCont-caja{display: flex;}
-
-*/
+.noHover:hover{
+    cursor: auto;
+    transform: scale(1)
+}

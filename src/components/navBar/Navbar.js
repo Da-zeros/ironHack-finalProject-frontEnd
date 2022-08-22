@@ -20,18 +20,22 @@ function Navbar() {
     {
       text: "User dashboard",
       icon: faChalkboardUser,
+      to: "/userDashboard"
     },
     {
       text: "Add new activity",
       icon: faList,
+      to:"/addActivity"
     },
     {
       text: "Chat",
       icon: faMessage,
+      to:"/chat"
     },
     {
       text: "Location",
       icon: faMapLocation ,
+      to:""
     },
     
   ]
@@ -53,8 +57,8 @@ function Navbar() {
             <span></span>
           </button>
         </div>
-          <div className="nav-menu">{menuItems.map(({ text, icon })=>(
-            <a href="#" className={ isExpanded? "menu-item": "menu-item menu-item-NX"}>
+          <div className="nav-menu">{menuItems.map(({ text, icon, to })=>(
+            <a href={to} className={ isExpanded? "menu-item": "menu-item menu-item-NX"}>
               <FontAwesomeIcon className="test" icon={icon} ></FontAwesomeIcon>
               { isExpanded&&<p>{text}</p>}
               
@@ -67,12 +71,12 @@ function Navbar() {
           <div className="nav-details">
           <img src="icons/user.png"/>
           <div className="nav-footer-info">
-            <p className="nav-footer-user-name">Dani</p>
+            <p className="nav-footer-user-name">Loged as {user.name}</p>
           </div>
          
         </div>
         )}
-        <FontAwesomeIcon className="logout-icon" icon={faArrowRightFromBracket} ></FontAwesomeIcon>
+        <FontAwesomeIcon className="logout-icon" icon={faArrowRightFromBracket}  onClick={logOutUser}></FontAwesomeIcon>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/auth.context";
 import './styles.css' 
 import Swal from 'sweetalert2';
 import NavBar from '../../components/navBar/Navbar'
+import Carousel from '../../components/carousel/Carousel'
 
 import {Cloudinary} from "@cloudinary/url-gen";
 
@@ -156,17 +157,18 @@ function HomePage() {
           <article className="homeContainer-searchArticle">
             <form className="homeContainer-form">
               
-              <div className="homeContainer-formGroup">
+              <div className="homeContainer-label">
                 <label>Filter by name, location...</label>
-                <input
-                value={findWord}
-                onChange={handleInputChange}
-                placeholder="Search by location, activity, name"
-                />
+                <label>Filter by activity type</label>
+                <label>Filter by date</label>
               </div>
             
-              <div className="homeContainer-formGroup">
-                <label>Filter by activity type</label>
+              <div className="homeContainer-input">
+                <input
+                  value={findWord}
+                  onChange={handleInputChange}
+                  placeholder="Search by location, activity, name"
+                />
                 <select 
                     name="activityType" 
                     value={findType}
@@ -178,18 +180,16 @@ function HomePage() {
                         })
                     }
                 </select>
-              </div>
-
-              <div className="homeContainer-formGroup">
-                <label>Filter by date</label>
-                
                 <input 
-                type="date"
-                value={findDate}
-                onChange={handleDateCange}
+                  type="date"
+                  value={findDate}
+                  onChange={handleDateCange}
                 />
               </div>
-              <button type="submit" onClick={handlenSubmit}>find!</button>
+              <div className="homeContainer-btn">
+                <button type="submit" onClick={handlenSubmit}>find!</button>
+              </div>
+              
             </form>
           </article>
          
@@ -199,11 +199,12 @@ function HomePage() {
           <h2>Look <span className="grey">the Last added</span> activities!</h2>
           <hr></hr>
           <article className="homeContainer-lastAddedArticle">
+            <Carousel>
                 {
                 
                 lastAct && lastAct.map( act =>{
                   return (
-                    <div key={act._id} onClick={e=>handleLastAdded(act)} className="homeContainer-card">
+                    <div key={act._id} onClick={e=>handleLastAdded(act)} className="homeContainer-card noShadow">
                       <h4>{act.title}</h4>
                       <p>Location: {act.location}</p>
                       <p>{act.description}</p>
@@ -212,27 +213,28 @@ function HomePage() {
                   )
                 })
                 }
+             </Carousel>
           </article>
-          
         </section>
 
-        <section className="homeContainer-section">
-          <h2 >What do the <span className='grey'>people think about</span> activities?</h2>
+        <section className="homeContainer-section blackBacground">
+          <h2 className="whiteColor">What do the <span className='grey'>people think about</span> activities?</h2>
           <hr></hr>
           <article className="homeContainer-lastComented">
+            <Carousel>
           {
             comentedAct && comentedAct.map( act =>{
               return (
-                <div key={act._id} onClick={e=>handleLastAdded(act)} className="homeContainer-card">
+                <div key={act._id} className="homeContainer-card noHover">
                   <h4>{act.title}</h4>
                   <p>Location: {act.location}</p>
-                  <p>{act.description}</p>
                   <hr></hr>
                   <p>Created: {act.comment}</p>
                 </div>
               )
             })
           }
+          </Carousel>
           </article>
         </section>
 

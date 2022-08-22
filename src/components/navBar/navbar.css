@@ -1,11 +1,12 @@
 .side-nav-container{
+    z-index: 1;
     background-color: var(--dark);
     width: 300px;
     height: 100vh;
     position: relative;
     color:  var(--light);
     position: fixed;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .side-nav-container-NX{
@@ -161,7 +162,7 @@
 }
 
 .nav-details img{
-    width: 50px;
+    width: 80px;
     padding: 0 20px;
 }
 

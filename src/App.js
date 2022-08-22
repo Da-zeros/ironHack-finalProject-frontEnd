@@ -78,11 +78,19 @@ function App() {
 			<Route exact path="/homePage" 
 				element={
 					<PrivateRoute>
-				
 						<HomePage />
 					</PrivateRoute>}
 			/>
-			<Route path="/nav" element={ <Navbar />}/>
+			<Route
+					exact
+					path="/addActivity"
+					element={
+						<PrivateRoute>
+							<AddActivity/>
+						</PrivateRoute>
+					}
+				/>
+			
 				{/*
 
 				
