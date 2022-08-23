@@ -8,7 +8,7 @@ import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
 import { faMapLocation } from '@fortawesome/free-solid-svg-icons'
 
-import './styes/newActivity.style.css'
+
 
 import { newActivityService, getActivityTypeService} from "../services/activities.services"
 import React, { useEffect, useState } from 'react'

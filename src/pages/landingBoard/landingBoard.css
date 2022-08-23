@@ -1,107 +1,36 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.mainContainer{
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
-.mainContainer--video{
-    z-index: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    animation: fade 2s ease-in-out forwards;
+
+
+.fadeIn{
+    animation: fade 5s ease-in-out forwards;
     opacity: 0;
 }
+
+
+.mainContainer--nabBar_item1{
+    animation: fade 6s ease-in-out forwards;
+    opacity: 0;
+  }
+  .mainContainer--nabBar_item2{
+    animation: fade 7s ease-in-out forwards;
+    opacity: 0;
+  }
+  .mainContainer--nabBar_item3{
+    animation: fade 8s ease-in-out forwards;
+    opacity: 0;
+  }
+  .mainContainer--nabBar_item4{
+    animation: fade 9s ease-in-out forwards;
+    opacity: 0;
+  }
+  
+  @keyframes fade{
+  to{opacity: 1; }
+  } 
 
 @keyframes fade{
     to{opacity: 1;}
 }
 
-.mainContainer--overlay{
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-.mainContainer--nabBarLanding{
-    z-index: 3;
-    width: 100%;
-    padding: 50px 20px 0px 20px;
-    justify-content:flex-end;
-    color: white;
-    position: absolute;
-    display: flex;
-    border-bottom: 1px solid white;
-    animation: fade 4s ease-in-out forwards;
-    opacity: 0;
-}
-
-.mainContainer--nabBarLanding a{
-    padding: 0px 20px 5px 20px; 
-    text-decoration: none;
-    color: white;
-    display: block;
-    animation: fade 5s ease-in-out forwards;
-    opacity: 0;
-}
-
-.mainContainer--nabBarLanding a:hover{
-    cursor: pointer;
-    font-size:1em;
-    color: rgba(255, 255, 255, 0.672);
-}
-
-.mainContainer--nabBar_item1{
-    animation: fade 6s ease-in-out forwards;
-    opacity: 0;
-}
-.mainContainer--nabBar_item2{
-    animation: fade 7s ease-in-out forwards;
-    opacity: 0;
-}
-.mainContainer--nabBar_item3{
-    animation: fade 8s ease-in-out forwards;
-    opacity: 0;
-}
-.mainContainer--nabBar_item4{
-    animation: fade 9s ease-in-out forwards;
-    opacity: 0;
-}
-
-@keyframes fade{
-to{opacity: 1; }
-}
-.mainContainer--wraper{
-    position:absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-.mainContainer--glassBox{
-    background: linear-gradient(135deg, rgba(255,255,255, 0.1), rgba(255,255,255, 0));
-    backdrop-filter: blur(20px);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 32px;
-    margin-bottom: 50px;
-    color: rgba(245, 245, 245, 0.887);
-}
 
 .mainContainer--textContainer{
     padding: 50px;
@@ -183,24 +112,34 @@ button:hover{
 cursor: pointer;
 transform: scale(0.9);}
 
-@media (max-width: 390px){
+@media (max-width: 360px){
     .mainContainer--nabBarLanding{
-        font-size:0.9em ;
+        font-size:0.8em ;
         justify-content:center;
         align-items:center;
     }
 
     .mainContainer--textContainer h1{
-        font-size: 4em;
+        font-size: 3em;
+    }
+
+    .mainContainer--textContainer{
+        padding: 20px;
     }
 
     .glassBox{
+        margin: 0 auto;
         overflow: hidden;
-        height: 700px;
-        font-size: 0.9em;
+        height: 350px;
+        font-size: 0.7em;
         width: 350px;
     }
 
+    .mainContainer--glassBox_btn{
+        margin: 10px 0;
+       
+    }
+    
     .responsiveBtn{
         width: 200px;
     }

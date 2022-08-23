@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import videoSource from '../../media/videoBackground.mp4';
-import '../userAuth/auth.css'
+//import '../userAuth/auth.css'
 
 const PasswordModifyPage = () => {
 

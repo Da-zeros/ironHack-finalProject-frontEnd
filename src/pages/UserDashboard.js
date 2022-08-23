@@ -1,4 +1,4 @@
-import './styes/userDashboard.css'
+
 import React, { useEffect, useState } from 'react'
 import { getAllActivitiesServices, getUserEnrolledActService , delEnroledActivityService } from '../services/userDashboard.services'
 import { sendCommentService } from '../services/activities.services'

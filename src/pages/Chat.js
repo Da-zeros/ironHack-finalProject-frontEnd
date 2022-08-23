@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getAllMessagesServices  } from '../services/chatServices'
-import '../pages/styes/chat.css'
+
 import io from "socket.io-client"
 
 import Swal from 'sweetalert2'

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import "./styes/filteredActivities.css"
+
 import { useSearchParams } from 'react-router-dom'
 import { AuthContext } from "./../context/auth.context";  
 import { getFilteredActivity } from '../services/activities.services';

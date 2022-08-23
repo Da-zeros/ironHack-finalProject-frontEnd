@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getActivityTypeService, getFilteredActivity, getActivitiesService, getCommentActivitiesService } from '../../services/activities.services'
 import ActivitySearch from '../../components/ActivitySearch'
 import { AuthContext } from "../../context/auth.context"; 
-import './styles.css' 
+//import './styles.css' 
 import Swal from 'sweetalert2';
 import NavBar from '../../components/navBar/Navbar'
 import Carousel from '../../components/carousel/Carousel'

@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { useFormikRegister } from '../../../customHooks/useFormikRegister'
 
 
-import'./signUpComponent.css'
+
 
 function SignUpComponent({switchState}) {
 	
@@ -10,7 +10,7 @@ function SignUpComponent({switchState}) {
 	
 	return (
 		
-			<div className="mainContainer--glassBox">
+			<div className="mainContainer--glassBox extraMarginTop">
 				<form className="mainContainer--glassBox--loginForm" onSubmit={ handleSubmit }>
 					<h2>Register</h2>
 					<div>

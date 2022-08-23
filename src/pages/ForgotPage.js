@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useForgotPassVal } from '../customHooks/useForgotPassVal';
 import videoSource from '../media/videoBackground.mp4'
-import './passModify/styles.css'
+
 
 
 const ForgotPage = () => {
@@ -12,12 +12,12 @@ const ForgotPage = () => {
   return (
 
     <div className='mainContainer'>
-      <video className="mainContainer--video_noFadeIn" src={ videoSource } autoPlay loop muted />
+      <video className="mainContainer--video noFadeIn" src={ videoSource } autoPlay loop muted />
       <div className="mainContainer--overlay"></div>
-      <div className="mainContainer--nabBar">
-		      <Link to={'/'} className="mainContainer--nabBar_link">Home</Link>
-          <a className="mainContainer--nabBar_link">Take a tour</a>
-          <a className="mainContainer--nabBar_link">LogIn</a>
+      <div className="mainContainer--nabBarLanding noFadeIn">
+		      <Link to={'/'} >Home</Link>
+          <a >Take a tour</a>
+          <Link to={'/auth'}>LogIn</Link>
      	  </div>
     
 		    <div className="mainContainer--wraper">
