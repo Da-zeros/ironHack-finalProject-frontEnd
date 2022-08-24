@@ -1,149 +1,32 @@
-import { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { getActivityTypeService, getFilteredActivity, getActivitiesService, getCommentActivitiesService } from '../../services/activities.services'
-import ActivitySearch from '../../components/ActivitySearch'
-import { AuthContext } from "../../context/auth.context"; 
-//import './styles.css' 
-import Swal from 'sweetalert2';
+import { useGetActivitiesData } from '../../customHooks/useGetActivitiesData'
+import { useHomeFilterActivities} from '../../customHooks/useHomeFilterActivities'
+import { useHandleLastAdded } from '../../customHooks/useHandleLastAdded'
+
+import './homePage.css' 
+
 import NavBar from '../../components/navBar/Navbar'
 import Carousel from '../../components/carousel/Carousel'
 
-import {Cloudinary} from "@cloudinary/url-gen";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage } from '@cloudinary/react';
+import Moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 
 
 function HomePage() {
   
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-  console.log(user)
-
-  const { setFilter } = useContext(AuthContext)
-  const navigate = useNavigate()
-
-  const [ lastAct, setLasAct ] = useState("")
-  const [ comentedAct, setComentedAct ] = useState([])
-
-  const [ findWord, setFindWord ] = useState("")
-  const [ findType, setFindType ] = useState("")
-  const [ findDate, setFindDate ] = useState("")
-
-  const [ listActCo, setActCo ] = useState([])
+  const { types, lastAct, comentedAct } = useGetActivitiesData()
+  const { handleInputChange, handleSelectChange, handleDateCange,  handlenSubmit, findWord, findType, findDate,} = useHomeFilterActivities()
+  const { handleLastAdded } = useHandleLastAdded()
   
-
-  const [ types, setTypes] = useState([])
-  
-  const getActivitiTypes = async () => {
-        
-    try {
-        const response = await getActivityTypeService()
-        setTypes(response.data)
-    } catch (err) {
-        console.log(err)
-    }
-  }
-
-  const getActivities = async () => {
-        
-    try {
-        const response = await getActivitiesService()
-        
-        const data = response.data
-        setLasAct(data)
-        //setTypes(response.data)
-    } catch (err) {
-        console.log(err)
-    }
-  }
-
-  const getComrntActivities = async () => {
-        
-    try {
-        const responseC = await getCommentActivitiesService()
-        
-        const data2 = responseC.data
-        setComentedAct(data2)
-        //setTypes(response.data)
-    } catch (err) {
-        console.log(err)
-    }
-  }
-
-  useEffect(()=>{
-    getActivities()
-    getActivitiTypes()
-    getComrntActivities()
-  },[])
-
-  const handleInputChange = (e) =>{
-    const findWord = e.target.value
-    setFindWord(findWord)
-    setFindType("")
-  }
-
-  const handleSelectChange = (e) => {
-    const findTpe = e.target.value
-    setFindType(findTpe)
-    setFindWord("")
-  }
-
-  const handleDateCange = (e) => {
-    const findDate = e.target.value
-    setFindDate(findDate)
-    setFindType("")
-    setFindWord("")
-  }
-  console.log(user.name)
-
-  const handlenSubmit = async (e) => {
-   e.preventDefault()
-    console.log("findDate ->" ,findDate.length ,"FindWord",findWord.length, "FinType ->", findType.length)
-    try {
-      let queryToSend = {}
-      
-      if( findWord.length !== 0 ){
-        queryToSend = { filterWord:findWord }
-        setFilter(queryToSend)
-        navigate(`/activities`)
-      } 
-      else if(findType.length !== 0){
-        queryToSend = { filterType:findType }
-        setFilter(queryToSend)
-        navigate(`/activities`)
-      }
-      else if(findDate.length !== 0){
-        queryToSend = { filterDate:findDate }
-        setFilter(queryToSend)
-        navigate(`/activities`)
-      }
-      
-
-    } catch (err) {
-      console.log(err)
-    }                                                                                                 
-  }
-
- 
-  const cld = new Cloudinary({
+  let cld = new Cloudinary({
     cloud: {
         cloudName: 'dcuvwmjab'
     }
-    }); 
-
-   const handleLastAdded = (act) =>{
-    const myImage = cld.image(act.file)
-   
-       Swal.fire({
-      title: `${act.title}`,
-      text: `More activities like this one in ${act.type} section`,
-      
-      imageWidth: 400,
-      imageHeight: 200,
-      imageAlt: 'Custom image',
-    })
-   }
-
-    
-
-
+  }); 
+  
   return (
     <div className="homeContainer">
       <div>
@@ -201,15 +84,31 @@ function HomePage() {
           <article className="homeContainer-lastAddedArticle">
             <Carousel>
                 {
-                
+              
                 lastAct && lastAct.map( act =>{
                   return (
-                    <div key={act._id} onClick={e=>handleLastAdded(act)} className="homeContainer-card noShadow">
-                      <h4>{act.title}</h4>
-                      <p>Location: {act.location}</p>
-                      <p>{act.description}</p>
-                      <p>Created: {act.createdAt}</p>
+                 
+                    <div key={act._id} onClick={e=>handleLastAdded(act)} className="homeContainer-lastAddedCard">
+                      
+                        <h3>{act.title}</h3>
+                        <div className="lastAddedCard-imgContainer">
+                          <AdvancedImage className="lastAddedCard-img" cldImg={cld.image(act.file)}/>
+                        </div>
+                      
+                      <div className="lastAddedCard-info">
+                        <p>{act.description}</p>
+                        <div className="lastAddedCard-icons">
+                          <FontAwesomeIcon className="icon" icon={faLocationDot}></FontAwesomeIcon>
+                          <p>{act.location}</p>
+                          <FontAwesomeIcon className="icon" icon={  faCalendarDays }/>
+                          <p>{ Moment(act.createdAt).format('DD-MM-YYYY')}</p>
+                        </div>
+                        
+                          <button>More info</button>
+                        
+                      </div>
                     </div>
+                    
                   )
                 })
                 }
@@ -225,11 +124,14 @@ function HomePage() {
           {
             comentedAct && comentedAct.map( act =>{
               return (
-                <div key={act._id} className="homeContainer-card noHover">
+                <div key={act._id} className="homeContainer-lastAddedCard white">
                   <h4>{act.title}</h4>
                   <p>Location: {act.location}</p>
                   <hr></hr>
-                  <p>Created: {act.comment}</p>
+                  <div>
+                    <p>imagen con circulo y al lado nombre</p>
+                  </div>
+                  <p>Coment: {act.comment}</p>
                 </div>
               )
             })

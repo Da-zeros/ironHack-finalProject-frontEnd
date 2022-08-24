@@ -89,7 +89,16 @@ function App() {
 							<AddActivity/>
 						</PrivateRoute>
 					}
-				/>
+			/>
+
+			<Route
+				exact
+				path="/activities"
+				element={
+					<PrivateRoute>
+						<FilteredActivities />
+					</PrivateRoute>
+			}/>
 			
 				{/*
 
@@ -167,14 +176,7 @@ function App() {
 							<MapActivitiesPage />
 						</PrivateRoute>
 					}/>
-				<Route
-					exact
-					path="/Activities"
-					element={
-						<PrivateRoute>
-							<FilteredActivities />
-						</PrivateRoute>
-					}/>
+				
 				*/}
 			</Routes>
 		</div>

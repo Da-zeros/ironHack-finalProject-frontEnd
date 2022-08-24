@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/auth.context";  // <== IMPORT
 import './navbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChalkboardUser, faLocation } from '@fortawesome/free-solid-svg-icons'
+import { faChalkboardUser } from '@fortawesome/free-solid-svg-icons'
 import { faList } from '@fortawesome/free-solid-svg-icons'
 import { faMessage } from '@fortawesome/free-solid-svg-icons'
 import { faMapLocation } from '@fortawesome/free-solid-svg-icons'
@@ -57,9 +57,9 @@ function Navbar() {
             <span></span>
           </button>
         </div>
-          <div className="nav-menu">{menuItems.map(({ text, icon, to })=>(
-            <a href={to} className={ isExpanded? "menu-item": "menu-item menu-item-NX"}>
-              <FontAwesomeIcon className="test" icon={icon} ></FontAwesomeIcon>
+          <div className="nav-menu">{menuItems.map(({ text, icon, to },index)=>(
+            <a key={index} href={to} className={ isExpanded? "menu-item": "menu-item menu-item-NX"}>
+              <FontAwesomeIcon className="nav-menu-icon" icon={icon} ></FontAwesomeIcon>
               { isExpanded&&<p>{text}</p>}
               
               { !isExpanded&& <div className="tip">{text}</div>}

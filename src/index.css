@@ -13,8 +13,9 @@
 }
 
 html{
-  width: 100%;
+  min-width: 100vh;
   min-height: 100vh;
+  
 }
 
 body {
@@ -24,8 +25,9 @@ body {
   background-image: url('');
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
+  
 }
-
+ /************************************* LANDING PAGE *************************************************/
 .mainContainer{
   display: flex;
   position: absolute;
@@ -107,6 +109,9 @@ body {
 .extraMarginTop{
     margin-top: 100px;
 }
+
+
+ /************************************* LANDING PAGE *************************************************/
 button,
 select {
   padding: 5px 10px;

@@ -125,10 +125,11 @@
     color: #ffff;
 }
 
-.test {
+.nav-menu-icon {
     font-size: 1.5em;
     padding: 0 20px;
 }
+
 
 .menu-item:hover > .tip{
     display: block;
@@ -182,3 +183,18 @@
 .logout-icon:hover{
     background-color: var(--primary);
 }
+
+@media (max-width: 360px){
+    
+    .nav-menu-icon{
+        display: none;
+    }
+
+    .side-nav-container{
+        width: 100%;
+    }
+
+    .side-nav-container-NX{
+        width: 20px;
+    }
+ }
