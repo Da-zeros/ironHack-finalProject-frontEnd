@@ -21,6 +21,7 @@
 }
 
 .nav-heading{
+    padding:30px 10px;
     grid-template-columns: 2fr, 1fr;
     grid-template-rows: 1fr;
     height: 75px;
@@ -98,7 +99,9 @@
 }
 
 .nav-menu{
+    padding-top: 20px;
     grid-template-rows: repeat(7, 1fr);
+    gap: 40px;
     margin-top: 50px;
 }
 
@@ -126,7 +129,7 @@
 }
 
 .nav-menu-icon {
-    font-size: 1.5em;
+    font-size: 1.4em;
     padding: 0 20px;
 }
 
@@ -186,15 +189,13 @@
 
 @media (max-width: 360px){
     
-    .nav-menu-icon{
-        display: none;
-    }
-
     .side-nav-container{
-        width: 100%;
+        height: 100%;
     }
 
-    .side-nav-container-NX{
-        width: 20px;
+    .nav-brand h2{
+        font-size: 1.9em !important;
     }
+ 
+ 
  }

@@ -20,7 +20,7 @@ function HomePage() {
   const { types, lastAct, comentedAct } = useGetActivitiesData()
   const { handleInputChange, handleSelectChange, handleDateCange,  handlenSubmit, findWord, findType, findDate,} = useHomeFilterActivities()
   const { handleLastAdded } = useHandleLastAdded()
-  
+  console.log(comentedAct)
   let cld = new Cloudinary({
     cloud: {
         cloudName: 'dcuvwmjab'
@@ -29,13 +29,13 @@ function HomePage() {
   
   return (
     <div className="homeContainer">
-      <div>
+      <div className="homeContainer-nav">
        <NavBar />
       </div>
       <div className="homeContainer-sectionsGroup">
        
         <section className="homeContainer-section cityBackground">
-          <h2 className="whiteColor big">Find Activities</h2>
+          <h2>Find <span>Activities</span></h2>
           
           <article className="homeContainer-searchArticle">
             <form className="homeContainer-form">
@@ -50,7 +50,7 @@ function HomePage() {
                 <input
                   value={findWord}
                   onChange={handleInputChange}
-                  placeholder="Search by location, activity, name"
+                  placeholder="Enter word to find"
                 />
                 <select 
                     name="activityType" 
@@ -63,7 +63,7 @@ function HomePage() {
                         })
                     }
                 </select>
-                <input 
+                <input className="homeContainer-input-date"
                   type="date"
                   value={findDate}
                   onChange={handleDateCange}
@@ -79,7 +79,7 @@ function HomePage() {
         </section>
 
         <section className="homeContainer-section">
-          <h2>Look <span className="grey">the Last added</span> activities!</h2>
+          <h2 className="section-responsiveH2">Look <span className="grey">the Last added</span> activities!</h2>
           <hr></hr>
           <article className="homeContainer-lastAddedArticle">
             <Carousel>
@@ -117,21 +117,28 @@ function HomePage() {
         </section>
 
         <section className="homeContainer-section blackBacground">
-          <h2 className="whiteColor">What do the <span className='grey'>people think about</span> activities?</h2>
+          <h2 className="whiteColor section-responsiveH2 extra-margin">What do the <span className='grey'>people think about</span> activities?</h2>
           <hr></hr>
           <article className="homeContainer-lastComented">
             <Carousel>
           {
             comentedAct && comentedAct.map( act =>{
               return (
-                <div key={act._id} className="homeContainer-lastAddedCard white">
-                  <h4>{act.title}</h4>
-                  <p>Location: {act.location}</p>
-                  <hr></hr>
+                <div key={act._id} className="homeContainer-comentedCard">
                   <div>
-                    <p>imagen con circulo y al lado nombre</p>
+                    <h4>{act.title}</h4>
+                    <div className='comentedCard-info'>
+                      <FontAwesomeIcon className="icon" icon={faLocationDot}></FontAwesomeIcon>
+                      <p>{act.location}</p>
+                    </div>
+                   
+                    <p>{act.comment}</p>
+                    <hr></hr>
                   </div>
-                  <p>Coment: {act.comment}</p>
+                  <div className="comentedCard-user">
+                    <img src="icons/user.png"/>
+                    <p>By <span>{act.user?.name}</span></p>
+                  </div>
                 </div>
               )
             })
