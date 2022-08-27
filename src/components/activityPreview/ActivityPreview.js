@@ -13,6 +13,8 @@ import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
 import { faMapLocation } from '@fortawesome/free-solid-svg-icons'
 
+import './activityPreview.css'
+
 require('dotenv').config();
 
 const ActivityPreview = ({ activity }) => {
@@ -31,63 +33,53 @@ console.log(activity)
 
   return (
     
-    <div className="newActivityContainer-preview">
-    <div className="newActivityContainer-preview_row">
-        <div className="newActivityContainer-preview__row_colLeft">
-            <h4>{activity.title}</h4> 
+    <div className="previewActivityContainer">
+        <div className="previewActivityContainer--upper">
+            <div className="upper--colLeft">
+                <h4>{activity.title}</h4> 
+                
+                <div className="upper--colLef--icons">
+                    
+                    <div className="upper--colLef--icons_desc">
+                        <FontAwesomeIcon icon={faClipboardUser} size="1x"/>
+                        <p>{activity.type}</p>
+                    </div>
+                
+                    <div className="upper--colLef--icons_desc">
+                        <FontAwesomeIcon icon={faCalendarDays} size="1x"/>
+                        <p>{activity.date}</p>
+                    </div>
             
-            <div className="newActivityContainer-preview__row_colLeft_icon">
-                <FontAwesomeIcon icon={faClipboardUser} size="1x"/>
-                <div className="newActivityContainer-preview__row_colLeft_desc">
-                    <span>Activity type</span>
-                    <p>{activity.type}</p>
-                </div>
-            </div>
-            
-            <div className="newActivityContainer-preview__row_colLeft_icon">
-                <FontAwesomeIcon icon={faCalendarDays} size="1x"/>
-                <div className="newActivityContainer-preview__row_colLeft_desc">
-                    <span>Event date</span>
-                    <p>{activity.date}</p>
+                    <div className="upper--colLef--icons_desc">
+                        <FontAwesomeIcon icon={ faClock } size="1x"/>
+                        <p>{activity.time}</p>
+                    </div>
+                    
+                    <div className="upper--colLef--icons_desc">
+                        <FontAwesomeIcon icon={faMapLocation } size="1x"/>
+                        <p>{activity.location}</p>
+                    </div>
                 </div>
             </div>
 
-            <div className="newActivityContainer-preview__row_colLeft_icon">
-                <FontAwesomeIcon icon={ faClock } size="1x"/>
-                <div className="newActivityContainer-preview__row_colLeft_desc">
-                    <span>Duration</span>
-                    <p>{activity.time}</p>
+            <div className="upper--colRigth2">
+                <div className="upper--colRigth2--imgContainer">
+                    <AdvancedImage className="img" cldImg={myImage}/>
                 </div>
-               
-            </div>
-            
-            <div className="newActivityContainer-preview__row_colLeft_icon">
-                <FontAwesomeIcon icon={faMapLocation } size="1x"/>
-                <div className="newActivityContainer-preview__row_colLeft_desc">
-                    <span>Location</span>
-                    <p>{activity.location}</p>
-                </div>
-              
             </div>
         </div>
-        <div className="newActivityContainer-preview_row_colRigth2">
-          <AdvancedImage cldImg={myImage}/>
+        <div className="previewActivityContainer--bottom">
+            <hr></hr>
+            <h5>Description: </h5>
+           
+            <p>{activity.description}</p>
+            <h6>Something importan to know?</h6>
+            <p>{activity.notes}</p>
+            <button>sign up for the activity</button>
         </div>
-    </div>
-    <div className="newActivityContainer-preview_row2">
-        <h5>Description</h5>
-        <hr></hr>
-        <p>{activity.description}</p>
-        <h6>Something importan to know?</h6>
-        <p>{activity.notes}</p>
-    </div>
-    
-</div>
 
     
-        
-        
-    
+    </div>
     
   )
 }
