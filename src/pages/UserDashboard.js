@@ -11,7 +11,7 @@ import { faCommentDots } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import RatingStar from '../components/Rating.css'
 
-import ActivityPreview from '../components/ActivityPreview'
+import ActivityPreview from '../components/activityPreview/ActivityPreview'
 
 const UserDashboard = () => {
     

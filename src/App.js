@@ -21,7 +21,7 @@ import ForgotPage from './pages/ForgotPage';
 
 import MapActivitiesPage from './pages/MapActivitiesPage';
 import AddActivity from './pages/NewActivity'
-import FilteredActivities from './pages/FilteredActivities'
+import FilteredActivities from './pages/filteredActivities/FilteredActivities'
 
 function App() {
 	return (

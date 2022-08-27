@@ -16,14 +16,10 @@ export const useSwitch = () => {
         setChange(!change)
     }
 
-    const handleClick2=()=>{
-        console.log("Hola65")
-    }
 
     return {
         change,
         handleClick,
-        handleClick2,
         leftFadeInSpring
     }
     

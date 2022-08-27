@@ -1,7 +1,7 @@
 import { useFormik, yupToFormErrors } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2"
-import ActivityPreview from "../components/ActivityPreview";
+import ActivityPreview from "../components/activityPreview/ActivityPreview";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboardUser } from '@fortawesome/free-solid-svg-icons'
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
