@@ -1,11 +1,24 @@
+
+.filteredContainer{
+    background-color: #e9ecef;
+    display: grid;
+    grid-template-columns:0.1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "navbar filtAct detailAct"
+    ;
+}
+
+.filteredContainer--nav{
+    grid-area: navbar;
+}
+
 .filteredContainer--activities{
+    grid-area: filtAct;
     padding: 20px 50px;
 }
 
-.filteredContainer{
-    display: grid;
-    grid-template-columns:0.1fr 1fr 1fr;
-}
+
 
 .errorContainer{
     display: grid;
@@ -80,9 +93,21 @@
     text-align: center;
 }
 .filteredContaiener-detail{
-   
+    grid-area: detailAct;
     padding: 30px 50px;
 }
 
-
-
+@media (max-width: 360px){
+    
+    .filteredContainer{
+        grid-template-columns:0.1fr 1fr ;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: 
+        "navbar filtAct"
+        "navbar detailAct "
+        ;
+       
+    }
+    
+    
+}

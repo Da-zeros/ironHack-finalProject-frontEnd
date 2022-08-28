@@ -14,7 +14,7 @@ import PasswordModifyPage from './pages/passModify/PasswordModifyPage';
 import PrivateRoute from './components/PrivateRoute'; 
 import AnonRoute from './components/AnonRoute'; 
 import Chat from './pages/Chat'
-import UserDashboard from './pages/UserDashboard';
+import UserDashboard from './pages/userDashboard/UserDashboard';
 import VerifyPage from './pages/VerifyPage';
 import VerifiyTokenPassPage from './pages/VerifiyTokenPassPage'
 import ForgotPage from './pages/ForgotPage';
@@ -99,6 +99,16 @@ function App() {
 						<FilteredActivities />
 					</PrivateRoute>
 			}/>
+
+			<Route
+				exact
+				path="/userDashboard"
+				element={
+					<PrivateRoute>
+						<UserDashboard />
+					</PrivateRoute>
+				}
+				/>
 			
 				{/*
 
@@ -139,15 +149,7 @@ function App() {
 					}
 				/>
 				
-				<Route
-					exact
-					path="/userDashboard"
-					element={
-						<PrivateRoute>
-							<UserDashboard />
-						</PrivateRoute>
-					}
-				/>
+				
 
 				<Route
 					exact

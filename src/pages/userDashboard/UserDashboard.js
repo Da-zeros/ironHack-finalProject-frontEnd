@@ -1,17 +1,16 @@
 
 import React, { useEffect, useState } from 'react'
-import { getAllActivitiesServices, getUserEnrolledActService , delEnroledActivityService } from '../services/userDashboard.services'
-import { sendCommentService } from '../services/activities.services'
-import { startChatServices } from '../services/chatServices' 
+import { getAllActivitiesServices, getUserEnrolledActService , delEnroledActivityService } from '../../services/userDashboard.services'
+import { sendCommentService } from '../../services/activities.services'
+import { startChatServices } from '../../services/chatServices' 
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faCommentDots } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import RatingStar from '../components/Rating.css'
 
-import ActivityPreview from '../components/activityPreview/ActivityPreview'
+import ActivityPreview from '../../components/activityPreview/ActivityPreview'
 
 const UserDashboard = () => {
     

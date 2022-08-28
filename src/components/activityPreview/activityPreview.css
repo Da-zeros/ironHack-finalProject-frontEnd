@@ -49,3 +49,60 @@
     background-color: none;
     border-radius: 50px;
   }
+
+
+  @media (max-width: 360px){
+    
+    .previewActivityContainer{
+        display: grid;
+        grid-template-rows:repeat(2, auto);
+        
+    }
+    
+    .previewActivityContainer--upper{
+        display: grid;
+        grid-template-columns:repeat(2, auto);
+    }
+    
+    .upper--colLeft{
+        justify-self: left;
+    }
+    
+    .upper--colLef--icons{
+        display: grid;
+        grid-template-rows: repeat(5, auto);
+        
+    }
+    
+    .upper--colLef--icons_desc{
+        display: flex;
+        align-items: baseline;
+    }
+    
+    .upper--colLef--icons_desc p{
+       margin:15px;
+    }
+    
+    .upper--colRigth2{
+    
+    }
+    
+    .upper--colRigth2--imgContainer{
+        width: 250px;
+    }
+    
+    .img
+    {
+        width: 100%;
+    }
+    .previewActivityContainer--bottom > *{
+      text-align: start;
+    }
+    
+    .previewActivityContainer--bottom  button{
+        padding: 10px 20px;
+        background-color: none;
+        border-radius: 50px;
+      }
+    
+  }

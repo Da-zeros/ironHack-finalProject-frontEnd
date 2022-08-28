@@ -33,9 +33,11 @@ const FilteredActivities = () => {
 
   return (
     <div className={!error?"filteredContainer":"errorContainer"}>
+      
       <div className="filteredContainer--nav">
         <Navbar />
       </div>
+      
       {
         error ?
         <div className="errorContainer--group">
