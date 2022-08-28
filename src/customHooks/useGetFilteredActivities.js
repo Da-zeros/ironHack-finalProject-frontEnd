@@ -8,13 +8,26 @@ export const useGetFilteredActivities = () => {
     const { filter } = useContext( AuthContext )
 
     const [ filteredList, setFilteredList ] = useState([])
+    const [ error, setError ] = useState("")
 
     const sendQuery = async () =>{
 
+      try{
+
         const findResponse = await getFilteredActivity(filter )
         const response = findResponse.data
+       
         setFilteredList(response)
-      
+      }
+      catch(err){
+        if(err?.response?.data?.message){
+          const badRequest = err?.response?.data?.message
+          setError(badRequest)
+        }
+       
+        
+      }
+       
     }
       
     useEffect(()=>{
@@ -22,6 +35,7 @@ export const useGetFilteredActivities = () => {
     },[])
 
   return {
+    error,
     filteredList
   }
 }

@@ -13,13 +13,17 @@ import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 import Moment from 'moment';
 
 import './filteredActivities.css'
+import { useNavigate } from 'react-router-dom'
+
 
 
 const FilteredActivities = () => {
 
-  const { filteredList} = useGetFilteredActivities()
+  const { filteredList, error} = useGetFilteredActivities()
   const { activity, switchDetail, handleClick,} =  useSwitchState()
   const { handleClick2, message } = useAddActivity()
+
+  const navigate = useNavigate()
   
   let cld = new Cloudinary({
     cloud: {
@@ -28,11 +32,19 @@ const FilteredActivities = () => {
   }); 
 
   return (
-    <div className="filteredContainer">
+    <div className={!error?"filteredContainer":"errorContainer"}>
       <div className="filteredContainer--nav">
         <Navbar />
       </div>
-      <div className="filteredContainer--activities">
+      {
+        error ?
+        <div className="errorContainer--group">
+          <p>{error}</p>
+          <button onClick={()=>navigate("../")}>ComeBack</button>
+        </div>
+        :
+        <>
+        <div className="filteredContainer--activities">
         {
           filteredList && filteredList.map( activity =>{
             return (
@@ -65,6 +77,9 @@ const FilteredActivities = () => {
         {switchDetail? <ActivityPreview activity={activity}/>:<h3>Touch the Card to see more info</h3>}
         {message&&<span>{message}</span>}
       </div>
+      </>
+      }
+      
       
      
     </div>

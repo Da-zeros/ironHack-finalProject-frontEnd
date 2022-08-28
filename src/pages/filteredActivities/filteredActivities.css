@@ -7,6 +7,25 @@
     grid-template-columns:0.1fr 1fr 1fr;
 }
 
+.errorContainer{
+    display: grid;
+    grid-template-columns:auto 1fr;
+}
+
+.errorContainer--group{
+    margin-top: 50px;
+}
+
+.errorContainer p{
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.errorContainer button{
+   padding: 10px 25px;
+   border-radius: 50px;
+}
+
 .activities--card{
     overflow: hidden;
     margin: 10px 10px;
@@ -64,4 +83,6 @@
    
     padding: 30px 50px;
 }
+
+
 
