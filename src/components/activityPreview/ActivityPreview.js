@@ -17,8 +17,8 @@ import './activityPreview.css'
 
 require('dotenv').config();
 
-const ActivityPreview = ({ activity }) => {
-console.log(activity)
+const ActivityPreview = ({ activity}) => {
+
 
         // Create and configure your Cloudinary instance.
     const cld = new Cloudinary({
@@ -75,7 +75,7 @@ console.log(activity)
             <p>{activity.description}</p>
             <h6>Something importan to know?</h6>
             <p>{activity.notes}</p>
-            <button>sign up for the activity</button>
+            
         </div>
 
     

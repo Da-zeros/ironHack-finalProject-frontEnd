@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom'
 const FilteredActivities = () => {
 
   const { filteredList, error} = useGetFilteredActivities()
-  const { activity, switchDetail, handleClick,} =  useSwitchState()
+  const { activityId,activity, switchDetail, handleClick,} =  useSwitchState()
   const { handleClick2, message } = useAddActivity()
 
   const navigate = useNavigate()
@@ -76,8 +76,16 @@ const FilteredActivities = () => {
         }
       </div>
       <div className='filteredContaiener-detail'>
-        {switchDetail? <ActivityPreview activity={activity}/>:<h3>Touch the Card to see more info</h3>}
+        {switchDetail? 
+        <div>
+           <ActivityPreview activity={activity} />
+           <button onClick={()=>handleClick2(activity._id)}>sign up for the activity</button>
+        </div>
+        :<h3>Touch the Card to see more info</h3>
+        }
+       
         {message&&<span>{message}</span>}
+       
       </div>
       </>
       }

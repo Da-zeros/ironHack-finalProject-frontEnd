@@ -1,5 +1,14 @@
 
 import React, { useEffect, useState } from 'react'
+
+import Navbar from '../../components/navBar/Navbar'
+
+import { useGetEnrolledAct } from '../../customHooks/useGetEnrolledAct' 
+import { useSwitchState } from '../../customHooks/useSwitchState'
+import { useStartChat } from '../../customHooks/useStartChat'
+import { useDelAct } from '../../customHooks/useDelAct'
+import { useSendComent } from '../../customHooks/useSendComent'
+
 import { getAllActivitiesServices, getUserEnrolledActService , delEnroledActivityService } from '../../services/userDashboard.services'
 import { sendCommentService } from '../../services/activities.services'
 import { startChatServices } from '../../services/chatServices' 
@@ -12,79 +21,20 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import ActivityPreview from '../../components/activityPreview/ActivityPreview'
 
+import  './userDashboard.css'
+
 const UserDashboard = () => {
     
+    const { userEnrolledAct } = useGetEnrolledAct()
+    const { activity, switchDetail, handleClick, } = useSwitchState()
+    const { handleChatClick } = useStartChat()
+    const { handleDelClick, switchComment } = useDelAct()
+    const { comment, handleComent,handleSubmit } = useSendComent()
+
     const [users, setUser] = useState([])
-    const navigate = useNavigate();
-    const [ userEnrolledAct, setUserEnrolledAct ] = useState([])
-    const [ detailActivity, setDetailActivity ] = useState("")
-    const [ switchToShow, setSwitchToShow ] = useState(false)
-    const [ switchComment, setSwichComment ] = useState(false)
-    const [ delActivityId, setDelActivityId] = useState("")
-    const [ comment, setComment ] = useState("")
- 
-    const getEnrolledAct = async () => {
-      
-      try {
 
-        const response = await getUserEnrolledActService()
-        const resData = response.data.activities
-        setUserEnrolledAct(resData)
 
-      } catch (err) {
-        console.log(err)
-      }
-    } 
 
-    useEffect(()=>{
-      getEnrolledAct()
-    },[])
-
-    const handleDetailClick = (act) => {
-      setDetailActivity(act)
-      setSwitchToShow(!switchToShow)
-    }
-
-    const handleChatClick = async ({user}) => {
-      
-      try {
-        const foundChat = await startChatServices(user)
-        navigate(`/chat/${foundChat.data._id}`)
-      }catch (error) {
-        console.log(error)
-      }
-
-    }
-
-    const handleDelClick = async ( activity )=>{
-      
-      try{
-        const delResponse = await delEnroledActivityService( activity._id )
-        const newActivities= userEnrolledAct.filter( (v) =>{
-          return ( v._id !== activity._id)
-        })
-        setUserEnrolledAct(newActivities)
-        setDelActivityId( activity._id)
-        setSwichComment(!switchComment)
-      }
-    
-      catch(err){
-        console.log(err)
-      }
-    }
-
-    const handleSubmit = async () => {
-      const objComent = {
-        comment,
-        delActivityId
-      }
-      try {
-        const delResponse = await  sendCommentService(objComent)
-        console.log(delResponse)
-      } catch (error) {
-        console.log(error)
-      }
-    }
 
     /*const handleClick= async (user)=>{
       console.log(e.target.value)
@@ -103,53 +53,70 @@ const UserDashboard = () => {
     }
 
 return (
+
   <div className='userDashboardCont'>
-    <div className="userDashboardCont-enrodlledAct">
-      <ul>
+    <div className="userDashboardCont--navContainer">
+      <Navbar />
+    </div>
+    <div className="userDashboardCont--usrEnrolledlledAct ">
+      <h2>Enrolled Activities</h2>
+      <hr></hr>
+      <ul className="usrEnrolledlledAct--ul">
         {
           userEnrolledAct && userEnrolledAct.map(act => {
             return (
             <li 
-              className="userDashboardCont-enrodlledAct_li" 
+              className="usrEnrolledlledAct--li" 
               key={act._id}>
                 <p>{act.title}</p> 
-                <FontAwesomeIcon 
-                  onClick={e => handleDetailClick(act)} 
-                  icon={ faMagnifyingGlass } 
-                  size="1x"/>
-                <FontAwesomeIcon 
-                  onClick={e => handleChatClick(act)} 
-                  icon={ faCommentDots } 
-                  size="1x"/>
-                <FontAwesomeIcon 
-                  onClick={e => handleDelClick(act)} 
-                  icon={ faTrash } 
-                  size="1x"/>
+                <div className="li--icon">
+                  <FontAwesomeIcon 
+                    onClick={e => handleClick(act)} 
+                    icon={ faMagnifyingGlass } 
+                    size="1x"/>
+                  <FontAwesomeIcon 
+                    onClick={e => handleChatClick(act)} 
+                    icon={ faCommentDots } 
+                    size="1x"/>
+                  <FontAwesomeIcon 
+                    onClick={e => handleDelClick(act)} 
+                    icon={ faTrash } 
+                    size="1x"/>
+                </div>
             </li>
           )})
         }
       </ul>
     </div>
-    <div className="userDashboardCont-actDetail">
-       { switchToShow?<ActivityPreview activity={detailActivity} /> : <h4>Select an activity to see the details</h4>}
-    </div>
-    <div className="userDashboardCont-miActivities">
-        <p>mi act</p>
-    </div>
-    <div className="userDashboardCont-showComent">
-      {
+    <div className="userDashboardCont--actDetailCont">
+      <div className="actDetailCont--act">
+        { switchDetail
+            ?<ActivityPreview activity={activity} /> 
+            : <h2>Select an activity to see the details</h2>
+        }
+      </div>
+      <div>
+       {
         switchComment?
-        <div>
+        <div className="actDetailCont--comment">
           <form onSubmit={handleSubmit}>
             <h4>leave us a comment!</h4>
-            <textarea value={comment} onChange={ e => setComment(e.target.value) }></textarea>
+            <textarea value={comment} onChange={ e => handleComent(e.target.value) }></textarea>
             <button  type="submit"></button>
           </form>
         </div>
         :
         <></>
-      }
-      <p>showCommntes</p>
+        }
+      </div>
+    </div>
+    <div className="userDashboardCont-userActivities">
+        <h2>mi act</h2>
+        <hr></hr>
+    </div>
+    <div className="userDashboardCont-userActDetail">
+        <h2>mi act detail</h2>
+        <hr></hr>
     </div>
   </div>
   

@@ -46,7 +46,7 @@ function Navbar() {
           { isExpanded&&
             <div className="nav-brand">
             <img src=""></img>
-            <h2>TimeCitizen</h2>
+            <Link className="nav-upper--logo" to="/"><h2>TimeCitizen</h2></Link>
           </div>
           }
           

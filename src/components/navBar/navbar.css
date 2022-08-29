@@ -13,6 +13,15 @@
     width: 85px;
 }
 
+.nav-upper--logo{
+    cursor: pointer;
+}
+
+.nav-upper--logo{
+    text-decoration: none;
+    color: #ffff;
+}
+
 .nav-upper,
 .nav-heading,
 .nav-menu,

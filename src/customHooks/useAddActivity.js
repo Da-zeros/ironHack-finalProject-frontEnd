@@ -5,14 +5,13 @@ import Swal from 'sweetalert2';
 
 export const useAddActivity = () => {
 
-    const { activityId} = useSwitchState()
    
     const [ message , setMessage ] = useState(undefined)
 
-    const addActivity = async () => {
+    const addActivity = async (value) => {
         
         try{
-          const addResponse = await addActivityServices(activityId)
+          const addResponse = await addActivityServices(value)
           if(addResponse){
             
             Swal.fire({
@@ -33,8 +32,9 @@ export const useAddActivity = () => {
       }
     
     
-      const handleClick2 = () => {
-        addActivity()
+      const handleClick2 = (value) => {
+        addActivity(value)
+       
       }
 
   return {

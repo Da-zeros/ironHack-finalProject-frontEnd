@@ -1,6 +1,6 @@
 
 .filteredContainer{
-    background-color: #e9ecef;
+    
     display: grid;
     grid-template-columns:0.1fr 1fr 1fr;
     grid-template-rows: 1fr;

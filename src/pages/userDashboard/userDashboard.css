@@ -1,0 +1,65 @@
+.dashboardCard{
+    box-shadow: 0px 2px 3px grey;
+    border-radius: 4px;
+}
+.userDashboardCont{
+    display: grid;
+    grid-template-columns: 0.1fr 1fr 1fr;
+    grid-template-rows: repeat(2,1fr);
+    grid-template-areas: 
+    "navBar userEnrollAct activityDetail"
+    "navBar userAct userActDetail"
+    ;
+}
+
+.userDashboardCont--navContainer{
+    grid-area:navBar;
+}
+
+.userDashboardCont--usrEnrolledlledAct{
+    grid-area:userEnrollAct;
+    padding: 50px;
+}
+
+.usrEnrolledlledAct--ul{
+    margin:20px 0;
+}
+
+.usrEnrolledlledAct--li{
+
+    display:flex;
+    padding: 10px 30px;
+    justify-content: space-between;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+    border-radius: 3px;
+    margin-bottom: 20px;
+   
+}
+
+.li--icon > *{
+    margin: 0 10px;
+}
+
+.userDashboardCont--actDetailCont{
+    grid-area:activityDetail;
+    padding: 50px;
+}
+
+.actDetailCont--act{
+
+}
+
+.actDetailCont--comment{
+
+}
+
+.userDashboardCont-userActivities{
+    grid-area: userAct;
+    padding: 0 50px;
+}
+
+.userDashboardCont-userActDetail{
+    grid-area:userActDetail;
+    padding: 0 50px;
+}
