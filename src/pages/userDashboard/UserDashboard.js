@@ -1,56 +1,96 @@
 
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Navbar from '../../components/navBar/Navbar'
+import ComentBox from '../../components/comentBox/ComentBox'
+import ActivityPreview from '../../components/activityPreview/ActivityPreview'
 
-import { useGetEnrolledAct } from '../../customHooks/useGetEnrolledAct' 
 import { useSwitchState } from '../../customHooks/useSwitchState'
 import { useStartChat } from '../../customHooks/useStartChat'
-import { useDelAct } from '../../customHooks/useDelAct'
-import { useSendComent } from '../../customHooks/useSendComent'
 
 import { getAllActivitiesServices, getUserEnrolledActService , delEnroledActivityService } from '../../services/userDashboard.services'
 import { sendCommentService } from '../../services/activities.services'
 import { startChatServices } from '../../services/chatServices' 
-import { useNavigate } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import Swal from 'sweetalert2'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faCommentDots } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-
-import ActivityPreview from '../../components/activityPreview/ActivityPreview'
 
 import  './userDashboard.css'
 
 const UserDashboard = () => {
     
-    const { userEnrolledAct } = useGetEnrolledAct()
-    const { activity, switchDetail, handleClick, } = useSwitchState()
-    const { handleChatClick } = useStartChat()
-    const { handleDelClick, switchComment } = useDelAct()
-    const { comment, handleComent,handleSubmit } = useSendComent()
+  const [ userEnrolledAct, setUserEnrolledAct ] = useState([])
+  const [ delActivityId, setDelActivityId] = useState("")
+  const [ showDivContent, setShowDivContent ] = useState(false)
 
-    const [users, setUser] = useState([])
+  const { activity, switchDetail, handleClick, } = useSwitchState()
+  const { handleChatClick } = useStartChat()
 
+  const getEnrolledAct = async () => {
+    
+    try {
 
+      const response = await getUserEnrolledActService()
+      const resData = response.data.activities
+      setUserEnrolledAct(resData)
 
-
-    /*const handleClick= async (user)=>{
-      console.log(e.target.value)
-      /*
-      try {
-        const foundChat = await startChatServices(user._id)
-        navigate(`/chat/${foundChat.data._id}`)
-      } catch (error) {
-        
-      }
-      
-    }*/
-
-    if(!users){
-      return <h3>...Loading</h3>
+    } catch (err) {
+      console.log(err)
     }
+} 
+
+useEffect(()=>{
+  getEnrolledAct()
+},[ setUserEnrolledAct  ])
+
+const handleComentContainer = () =>{
+  setShowDivContent(!showDivContent)
+}
+
+const handleDelClick = async ( activity )=>{
+  
+  const swalDelResponse = await Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  })
+
+  if( swalDelResponse.isConfirmed ){
+    
+    try{
+      delEnroledActivityService( activity._id )
+      const newActivities = userEnrolledAct.filter( (v) =>{
+        return ( v._id !== activity._id)
+      })
+      setUserEnrolledAct(newActivities)
+      setDelActivityId( activity._id)
+    }
+    catch(err){
+      console.log(err)
+    }
+
+    const swalcomentResponse = await Swal.fire({
+      text: "Coud you leave us a comment?",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    })
+  
+    if(swalcomentResponse.isConfirmed){
+      setShowDivContent(!showDivContent)
+    }
+  }
+}
 
 return (
 
@@ -90,23 +130,15 @@ return (
     </div>
     <div className="userDashboardCont--actDetailCont">
       <div className="actDetailCont--act">
-        { switchDetail
+        { switchDetail 
             ?<ActivityPreview activity={activity} /> 
             : <h2>Select an activity to see the details</h2>
         }
       </div>
       <div>
-       {
-        switchComment?
-        <div className="actDetailCont--comment">
-          <form onSubmit={handleSubmit}>
-            <h4>leave us a comment!</h4>
-            <textarea value={comment} onChange={ e => handleComent(e.target.value) }></textarea>
-            <button  type="submit"></button>
-          </form>
-        </div>
-        :
-        <></>
+        {
+          showDivContent&&
+          <ComentBox delId={delActivityId} comentHandler={handleComentContainer}/>
         }
       </div>
     </div>
@@ -118,18 +150,7 @@ return (
         <h2>mi act detail</h2>
         <hr></hr>
     </div>
-  </div>
-  
-    
+  </div> 
   )
 }
-  {/*
-    users? 
-    users.map((user)=>{
-      return (
-      <>
-        <button onClick={()=>handleClick(user)}>Chat with {user.name}</button>
-      </>)
-    }):<p>Cargando</p>*/
-  }
 export default UserDashboard

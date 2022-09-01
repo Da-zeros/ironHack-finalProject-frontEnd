@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getAllMessagesServices  } from '../services/chatServices'
+import { getAllMessagesServices  } from '../../services/chatServices'
 
+import Navbar from '../../components/navBar/Navbar'
 import io from "socket.io-client"
 
 import Swal from 'sweetalert2'
+import './chat.css'
 
 let socket
 
@@ -60,6 +62,9 @@ const Chat = () => {
 
   return (
     <div className="containerChat">
+      <div className="containerChat--navBar">
+        <Navbar />
+      </div>
 			<h3>Chat Page</h3>
       <div>
       {

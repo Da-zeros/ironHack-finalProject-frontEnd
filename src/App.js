@@ -13,7 +13,7 @@ import PasswordModifyPage from './pages/passModify/PasswordModifyPage';
 
 import PrivateRoute from './components/PrivateRoute'; 
 import AnonRoute from './components/AnonRoute'; 
-import Chat from './pages/Chat'
+import Chat from './pages/chat/Chat'
 import UserDashboard from './pages/userDashboard/UserDashboard';
 import VerifyPage from './pages/VerifyPage';
 import VerifiyTokenPassPage from './pages/VerifiyTokenPassPage'
@@ -109,10 +109,29 @@ function App() {
 					</PrivateRoute>
 				}
 				/>
+
+			<Route
+				exact
+				path="/chat"
+				element={
+					<PrivateRoute>
+						<Chat />
+					</PrivateRoute>
+				}
+			/>
+
+			<Route
+				exact
+				path="/chat/:chatId"
+				element={
+					<PrivateRoute>
+						<Chat />
+					</PrivateRoute>
+				}
+				/>
 			
 				{/*
 
-				
 				<Route
 					exact
 					path="/addActivity"
@@ -127,27 +146,11 @@ function App() {
 				
 				
 
-				<Route
-					exact
-					path="/chat"
-					element={
-						<PrivateRoute>
-							<Chat />
-						</PrivateRoute>
-					}
-				/>
+				
 
 	
 
-				<Route
-					exact
-					path="/chat/:chatId"
-					element={
-						<PrivateRoute>
-							<Chat />
-						</PrivateRoute>
-					}
-				/>
+				
 				
 				
 

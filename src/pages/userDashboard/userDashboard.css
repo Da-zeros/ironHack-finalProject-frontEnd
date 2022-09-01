@@ -41,6 +41,10 @@
     margin: 0 10px;
 }
 
+.li--icon:hover{
+    cursor: pointer;
+}
+
 .userDashboardCont--actDetailCont{
     grid-area:activityDetail;
     padding: 50px;
