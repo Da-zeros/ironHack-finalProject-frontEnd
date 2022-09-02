@@ -10,4 +10,8 @@ const getAllMessagesServices = (chatId) =>  {
     return service.get(`${URL}/messages/${chatId}`);
 }
 
-export {startChatServices , getAllMessagesServices }
+const getAllConversationsServices = () =>{
+    return service.get(`${URL}`);
+}
+
+export {startChatServices , getAllMessagesServices, getAllConversationsServices }

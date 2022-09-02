@@ -1,0 +1,46 @@
+.containerChatPage{
+    display: grid;
+    grid-template-columns:0.1fr 1fr;
+    grid-template-rows: 100vh;
+}
+
+.containerChatPage--nav{
+    border: 1px solid black;
+}
+
+.containerChatPage--chat{
+    display: grid;
+    place-items: center;
+}
+
+.chat--container{
+    width: 90%;
+    height: 70%;
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: 0.3fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.chat--conversations{
+    border: 1px solid black;
+}
+
+.chat--screen{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 1fr 0.2fr;
+    border: 1px solid black;
+}
+
+.chat--currentChat{
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.chat--display{
+    border: 1px solid rgb(183, 28, 28);
+}
+
+.chat--input{
+    border: 1px solid rgb(116, 28, 183);
+}
