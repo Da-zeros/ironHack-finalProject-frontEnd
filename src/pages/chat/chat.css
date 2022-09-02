@@ -1,4 +1,5 @@
 .containerChatPage{
+    background-color:whitesmoke;
     display: grid;
     grid-template-columns:0.1fr 1fr;
     grid-template-rows: 100vh;
@@ -16,31 +17,62 @@
 .chat--container{
     width: 90%;
     height: 70%;
-    border: 1px solid black;
+    border: 0.8px solid black;
     display: grid;
-    grid-template-columns: 0.3fr 1fr;
+    grid-template-columns: 0.2fr 1fr;
     grid-template-rows: 1fr;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
+
 .chat--conversations{
-    border: 1px solid black;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color:#11547b58;
+    border-right: 0.8px solid #11547b58;
+}
+
+.line-button{
+    border-bottom: 1px solid black;
+}
+.conversation--div{
+   display: flex;
+   align-items: baseline;
+   margin-bottom: 20px;
+   border-bottom: 0.8px solid black;
+}
+
+.div--img{
+    width: 50px;
+    margin-right: 15px;
+}
+
+.div--img > img{
+    width: 100%;
 }
 
 .chat--screen{
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 0.2fr 1fr 0.2fr;
-    border: 1px solid black;
+    grid-template-rows: 1fr 0.2fr;
 }
 
 .chat--currentChat{
-    border: 1px solid rgb(0, 0, 0);
+    border: 0.8px solid rgb(0, 0, 0);
 }
 
 .chat--display{
-    border: 1px solid rgb(183, 28, 28);
 }
 
 .chat--input{
-    border: 1px solid rgb(116, 28, 183);
+    border: 0.8px solid black;
+    display: flex;
+}
+
+.chat--input input{
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
 }

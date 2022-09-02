@@ -12,7 +12,7 @@ let socket
 
 const Chat = () => {
     
-  const [ allChats, chats ] = useState([])
+  const [ allChats, setAllchats ] = useState([])
   const [ allMessages, setAllMessages ] = useState([])
   const [ text, setText ] = useState("")
   const { chatId } = useParams()
@@ -23,7 +23,12 @@ const Chat = () => {
       const allConversationsResponse = await getAllConversationsServices()
       const data = allConversationsResponse.data
       data.forEach(d => {
-        console.log(d.participants[1])
+        let chatName = d.participants[1].name
+        setAllchats (previousState => {
+          const newState = [...previousState, chatName]
+          return newState
+          })
+        
       });
     } catch (err) {
       console.log(err)
@@ -73,49 +78,54 @@ const Chat = () => {
     socket.emit("send_message",messageObj)
     setText("")
   }
-
+  console.log(allChats)
   return (
     <div className="containerChatPage">
       <div className="containerChatPage--nav">
         <Navbar/>
       </div>
       <div className="containerChatPage--chat">
-       <div className="chat--container">
-        <div className="chat--conversations">
-          nombres de las personas
+        <div className="chat--container">
+          <div className="chat--conversations">
+            {
+            allChats&& allChats.map((chats,index) =>{
+              return (
+                <div className="conversation--div">
+                  <div className="div--img">
+                    <img src="icons/user.png"/>
+                  </div>
+                  <p key={index}>{chats}</p>
+                </div>)
+            })
+            }  
+          </div>
+          <div className="chat--screen">
+            <div className="chat--display">
+              {
+                allMessages && allMessages.map( eachMessage =>{
+                  return (
+                    <div className="containerTexto" key={eachMessage._id}>
+                      {eachMessage.sender.name}: {eachMessage.text}
+                    </div>
+                    )
+                  })
+              }
+            </div>
+            <div className="chat--input">
+              <input 
+                type="text" 
+                placeholder='Message'
+                name="text"  
+                value={text} 
+                onChange={handleChange} 
+              />
+              <button onClick={sendMessage}>Send</button>
+            </div>
+          </div>
         </div>
-        <div className="chat--screen">
-          <div className="chat--currentChat">
-            con quien hablo
-          </div>
-          <div className="chat--display">
-            mensajes
-          </div>
-          <div className="chat--input">
-            input
-          </div>
         </div>
-       </div>
       </div>
-    </div>
   )
 }
-/**{
-  allMessages && allMessages.map((eachMessage) =>{
-    return (
-      <div className="containerTexto" key={eachMessage._id}>
-        {eachMessage.sender.name}: {eachMessage.text}
-      </div>
-      )
-    })
 
-    <input 
-      type="text" 
-      placeholder='Message'
-      name="text"  
-      value={text} 
-      onChange={handleChange} 
-    />
-    <button onClick={sendMessage}>Send</button>
-} */
 export default Chat
