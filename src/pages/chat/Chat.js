@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getAllMessagesServices, getAllConversationsServices  } from '../../services/chatServices'
+
+import { getAllMessagesServices, getAllConversationsServices, startChatServices } from '../../services/chatServices'
 
 import Navbar from '../../components/navBar/Navbar'
 import io from "socket.io-client"
@@ -15,29 +16,14 @@ const Chat = () => {
   const [ allChats, setAllchats ] = useState([])
   const [ allMessages, setAllMessages ] = useState([])
   const [ text, setText ] = useState("")
+  const [ chatRoomState, setChatRoomState ] = useState()
+
   const { chatId } = useParams()
 
-  const getAllConversations = async () => {
 
-    try {
-      const allConversationsResponse = await getAllConversationsServices()
-      const data = allConversationsResponse.data
-      data.forEach(d => {
-        let chatName = d.participants[1].name
-        setAllchats (previousState => {
-          const newState = [...previousState, chatName]
-          return newState
-          })
-        
-      });
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  const socketConnection = () =>{
+  let socketConnection = () =>{
       
-    const storedToken = localStorage.getItem("authToken")
+    let storedToken = localStorage.getItem("authToken")
     
     socket = io.connect("http://localhost:5005", {
       extraHeaders:{ Authorization: `Bearer ${storedToken}` }
@@ -49,16 +35,55 @@ const Chat = () => {
       setAllMessages(previousState => {
         const newState = [...previousState, newMessage]
         return newState
+      })
+    })
+  }
+
+  const handleStartConversation = async (value) =>{
+    
+    const response = await startChatServices( value )
+    const chatRoom = response.data._id
+    setChatRoomState(chatRoom)
+
+    let socketConnection = () =>{
+      
+      let storedToken = localStorage.getItem("authToken")
+      
+      socket = io.connect("http://localhost:5005", {
+        extraHeaders:{ Authorization: `Bearer ${storedToken}` }
+      })
+  
+      socket.emit("join_chat", chatRoomState)
+  
+      socket.on('receive_message', (newMessage) =>{
+        setAllMessages(previousState => {
+          const newState = [...previousState, newMessage]
+          return newState
         })
       })
+    }
+
+    socketConnection()
   }
-  
-  useEffect(()=>{
-    getAllConversations()
-    //getAllMessages()
-    //socketConnection()
-    
-  },[])
+
+  const getAllConversations = async () => {
+
+    try {
+
+      const allConversationsResponse = await getAllConversationsServices()
+      const data = allConversationsResponse.data
+      data.forEach(d => {
+        let chatName = d.participants[1]
+        setAllchats (previousState => {
+          const newState = [...previousState, chatName]
+          return newState
+          })
+        
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const getAllMessages = async () =>{
 
@@ -69,7 +94,8 @@ const Chat = () => {
     } catch (err) {
       console.log(err)
     }
-  }  
+  } 
+
   const handleChange = (e) => setText(e.target.value)
   
   const sendMessage = () => {
@@ -78,7 +104,13 @@ const Chat = () => {
     socket.emit("send_message",messageObj)
     setText("")
   }
-  console.log(allChats)
+
+  useEffect(()=>{
+    socketConnection()
+    getAllConversations()
+    getAllMessages()
+  },[])
+  
   return (
     <div className="containerChatPage">
       <div className="containerChatPage--nav">
@@ -88,13 +120,13 @@ const Chat = () => {
         <div className="chat--container">
           <div className="chat--conversations">
             {
-            allChats&& allChats.map((chats,index) =>{
+            allChats&& allChats.map((chats) =>{
               return (
-                <div className="conversation--div">
+                <div  onClick={()=>handleStartConversation(chats._id)} key={chats._id} className= "conversation--div">
                   <div className="div--img">
                     <img src="icons/user.png"/>
                   </div>
-                  <p key={index}>{chats}</p>
+                  <p className="div--name">{chats.name}</p>
                 </div>)
             })
             }  
@@ -102,9 +134,9 @@ const Chat = () => {
           <div className="chat--screen">
             <div className="chat--display">
               {
-                allMessages && allMessages.map( eachMessage =>{
+                allMessages && allMessages.map( (eachMessage) =>{
                   return (
-                    <div className="containerTexto" key={eachMessage._id}>
+                    <div  className="containerTexto" key={eachMessage._id}>
                       {eachMessage.sender.name}: {eachMessage.text}
                     </div>
                     )

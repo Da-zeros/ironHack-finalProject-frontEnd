@@ -7,7 +7,6 @@ import ComentBox from '../../components/comentBox/ComentBox'
 import ActivityPreview from '../../components/activityPreview/ActivityPreview'
 
 import { useSwitchState } from '../../customHooks/useSwitchState'
-import { useStartChat } from '../../customHooks/useStartChat'
 
 import { getAllActivitiesServices, getUserEnrolledActService , delEnroledActivityService } from '../../services/userDashboard.services'
 import { sendCommentService } from '../../services/activities.services'
@@ -28,7 +27,8 @@ const UserDashboard = () => {
   const [ showDivContent, setShowDivContent ] = useState(false)
 
   const { activity, switchDetail, handleClick, } = useSwitchState()
-  const { handleChatClick } = useStartChat()
+
+  const navigate = useNavigate()
 
   const getEnrolledAct = async () => {
     
@@ -90,6 +90,17 @@ const handleDelClick = async ( activity )=>{
       setShowDivContent(!showDivContent)
     }
   }
+}
+
+const handleChatClick = async ({user}) => {
+    
+  try {
+    const foundChat = await startChatServices(user)
+    navigate(`/chat/${foundChat.data._id}`)
+  }catch (error) {
+    console.log(error)
+  }
+
 }
 
 return (
